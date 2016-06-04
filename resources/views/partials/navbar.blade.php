@@ -7,9 +7,10 @@
                 </a>
             </div>
             <ul class="nav navbar-nav pull-right">
-                <li><a href="#">Your requests</a></li>
-                <li><a href="#">All requests</a></li>
-                <li><a href="#">Report error</a></li>
+                <li><a href="/">All requests</a></li>
+                <li><a href="/userrequests">Your requests</a></li>
+                <li><a href="/reporterror">Report error</a></li>
+                <li><a href="/logout">Log out</a></li>
             </ul>
         </div>
     </nav>
@@ -23,6 +24,7 @@
             </div>
             <ul class="nav navbar-nav pull-right">
                 <li><a href="/register">Register</a></li>
+                <li><a href="/login">Log in</a></li>
             </ul>
         </div>
     </nav>

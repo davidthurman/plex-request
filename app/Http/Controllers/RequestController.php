@@ -8,7 +8,11 @@ use App\Http\Requests;
 
 class RequestController extends Controller
 {
-    public function home() {
-      return view('home');
+    public function allRequests() {
+      return view('allRequests');
+    }
+
+    public function userRequests() {
+        return view('userRequests');
     }
 }

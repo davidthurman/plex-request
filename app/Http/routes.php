@@ -6,6 +6,11 @@
 
 Route::group(['middleware' => 'admin'], function() {
 
+        Route::get('/admin', [
+            'as' => 'admin',
+            'uses' => 'RequestController@admin'
+        ]);
+
 });
 
 /*
@@ -16,7 +21,17 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/', [
         'as' => 'home',
-        'uses' => 'RequestController@home'
+        'uses' => 'RequestController@allRequests'
+    ]);
+
+    Route::get('/userrequests', [
+        'as' => 'userrequests',
+        'uses' => 'RequestController@userRequests'
+    ]);
+
+    Route::get('/reporterror', [
+        'as' => 'reporterror',
+        'uses' => 'ErrorController@reportError'
     ]);
 
 });
@@ -43,6 +58,7 @@ Route::get('logout', [
     'as' => 'logout',
     'uses' => 'AuthController@getLogout',
 ]);
+
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
