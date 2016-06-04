@@ -29,6 +29,11 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'RequestController@userRequests'
     ]);
 
+    Route::post('/submitrequest', [
+        'as' => 'submitrequest',
+        'uses' => 'RequestController@submit'
+    ]);
+
     Route::get('/reporterror', [
         'as' => 'reporterror',
         'uses' => 'ErrorController@reportError'

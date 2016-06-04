@@ -22,6 +22,15 @@
             @else
             <h2>No errors reported.</h2>
             @endif
+            <hr>
+            @if(!$requests->isEmpty())
+                <h2>Current requests:</h2>
+                @foreach ($requests as $request)
+                    {{ $request->title }}<br>
+                @endforeach
+            @else
+                <h2>No requests submitted.</h2>
+            @endif
         </div>
     @else
         <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
