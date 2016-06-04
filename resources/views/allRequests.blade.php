@@ -2,8 +2,12 @@
 
 @section('content')
     @if (Auth::check())
-    <p>Hello {{ Auth::user()->name }}! Here is a list of all unfulfilled requests:</p>
+    <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
+        <h2>Hello {{ Auth::user()->name }}! Here is a list of all unfulfilled requests:</h2>
+    </div>
     @else
-        <p>You shouldn't be seeing this, someone messed up.</p>
+    <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
+        <h2>You shouldn't be seeing this, someone messed up.</h2>
+    </div>
     @endif
 @stop

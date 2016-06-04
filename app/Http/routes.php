@@ -34,6 +34,11 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'ErrorController@reportError'
     ]);
 
+    Route::post('/submiterror', [
+        'as' => 'submiterror',
+        'uses' => 'ErrorController@submitError'
+    ]);
+
 });
 
 /*
