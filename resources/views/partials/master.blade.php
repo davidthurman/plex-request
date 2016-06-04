@@ -10,7 +10,6 @@
         <div class="container">
         @include('partials.navbar')
         @yield('content')
-        @include('partials.footer')
         </div>
     </body>
 </html>

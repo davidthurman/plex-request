@@ -1,18 +1,41 @@
 body {
   font-family: 'Open Sans', sans-serif;
   margin-top: 150px;
+  color: black;
+}
+
+.btn-primary {
+  color: black;
+  background-color: #ff8a00;
+  border-color: #ff8a00;
+}
+
+.btn-primary:hover {
+  color: black;
+  background-color: #ff8a00;
+  border: 1px solid black;
+}
+
+.panel-default>.panel-heading {
+  color: #333;
+  background-color: #323232;
+  border-color: #323232;
+}
+
+.btn-link:hover {
+  color: black;
 }
 
 a:link {
-  color: white;
+  color: black;
 }
 
 a:visited {
-  color: white;
+  color: black;
 }
 
 a:hover {
-  color: white;
+  color: black;
   text-decoration: underline;
 }
 
