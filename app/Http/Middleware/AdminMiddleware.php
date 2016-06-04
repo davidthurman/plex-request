@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class AdminMiddleware
 {
@@ -13,8 +14,19 @@ class AdminMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
-    {
+    public function handle($request, Closure $next) {
+
+        if(Auth::check()) {
+
+            if (!$request->user()->isAdmin())
+            {
+                return redirect('/')->with(\Session::flash('failure', 'You are not authorized to access this content.'));
+            }
+
+        }
+
+        else return redirect('/')->with(\Session::flash('failure', 'You are not authorized to access this content.'));
+
         return $next($request);
     }
 }

@@ -7,6 +7,9 @@
                 </a>
             </div>
             <ul class="nav navbar-nav pull-right">
+                @if (Auth::user()->isAdmin())
+                    <li><a href="/admin">Admin</a></li>
+                @endif
                 <li><a href="/">All requests</a></li>
                 <li><a href="/userrequests">Your requests</a></li>
                 <li><a href="/reporterror">Report error</a></li>
