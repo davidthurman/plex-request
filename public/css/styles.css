@@ -1,0 +1,46 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin-top: 150px;
+}
+
+a:link {
+  color: white;
+}
+
+a:visited {
+  color: white;
+}
+
+a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+.navbar {
+  background-color: #323232;
+  color: white;
+  font-size: 18px;
+}
+
+img.plexlogo {
+  padding: 15px;
+}
+.navbar-brand {
+  padding: 30px;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: white;
+  size:18px;
+  line-height: 60px;
+  padding-right: 20px;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+  color: white;
+  background-color: #ff8a00;
+}
+
+.navbar-default .navbar-nav>li>a:visited {
+  color: white;
+}
