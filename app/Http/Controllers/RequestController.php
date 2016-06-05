@@ -46,6 +46,8 @@ class RequestController extends Controller
 
         $title = $data['title'];
 
+        $title = rawurlencode($title);
+
         $url = "http://www.omdbapi.com/?t=" . $title . "&y=&plot=short&r=json";
 
         $json = json_decode(file_get_contents($url), true);
