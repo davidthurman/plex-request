@@ -29,6 +29,11 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'RequestController@userRequests'
     ]);
 
+    Route::post('/searchrequest', [
+        'as' => 'searchrequest',
+        'uses' => 'RequestController@searchRequest'
+    ]);
+
     Route::post('/submitrequest', [
         'as' => 'submitrequest',
         'uses' => 'RequestController@submit'

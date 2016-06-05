@@ -34,6 +34,12 @@ class RequestController extends Controller
 
     }
 
+    public function searchRequest() {
+
+        return 'searching api';
+
+    }
+
     public function submit(Request $request) {
 
         $data = $request->all();
