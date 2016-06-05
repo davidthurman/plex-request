@@ -59,7 +59,7 @@ class RequestController extends Controller
     public function submit(Request $request) {
 
         $data = $request->all();
-
+        $requests = PlexRequest::all();
         $newRequest = New PlexRequest;
 
         $newRequest->year = $data['year'];
@@ -75,6 +75,7 @@ class RequestController extends Controller
             return redirect()->back()
                 ->with(\Session::flash('failure', 'There was a problem. Your request was not submitted.'));
         } else {
+            return view('allRequests', compact('requests'));
             return redirect()->back()->with(\Session::flash('success', 'Your request was received.'));
         }
 

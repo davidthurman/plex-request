@@ -7,7 +7,8 @@
         <h2>Your unfulfilled requests:</h2>
 
         @foreach($requests as $request)
-            {{ $request->title }}<br>
+            {{ $request->year }}: {{ $request->title }}<br>
+
         @endforeach
 
         @if(!empty($json))

@@ -7,7 +7,7 @@
         <h2>Hello {{ Auth::user()->name }}! Here is a list of all unfulfilled requests:</h2>
 
         @foreach($requests as $request)
-            {{ $request->title }}<br>
+            {{ $request->title }} - {{ $request->year }}<br>
         @endforeach
     </div>
     @else
