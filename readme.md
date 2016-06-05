@@ -1,6 +1,8 @@
-#Allows people to request movies or tv shows to be added to your Plex server. Also allows errors to be reported.
+#plex-request
 
-###Requirements:
+Allows people to request movies or tv shows to be added to your Plex server. Also allows errors to be reported.
+
+###You will need:
 
 - Vagrant (not required, but recommended for ease of use)
 - Composer
@@ -8,6 +10,7 @@
 ###Installation steps:
 
 - Clone the repo.
+- Run 'composer install' to add the needed dependencies.
 - Rename .env.example to .env and enter the values for the database. If you're using the provided Vagrant box, the database is named scotchbox, and user/pass are both root. 
 - 'php artisan key:generate' to create your application's key and insert it automatically into your .env file. 
 - cd into the project dir on your local machine, run 'vagrant up', and let the box provision. 
