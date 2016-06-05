@@ -1,4 +1,4 @@
-#Allows for people to request movies or tv shows to be added to your Plex server. Also allows errors to be reported.
+#Allows people to request movies or tv shows to be added to your Plex server. Also allows errors to be reported.
 
 ###Requirements:
 
@@ -17,8 +17,9 @@
 
 ###To do:
 
-- Add pagination
+- Add pagination or infinite scroll w/ lazy loading
 - Fix spacing issues
 - Make it prettier
-- Add imdb thumbnails
-- Add multiple admin account creation
+- Add imdb thumbnails w/ their api
+- Allow admin to designate other accounts as admin
+- Allow deletion of requests/errors from admin panel
