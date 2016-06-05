@@ -9,6 +9,12 @@
         @foreach($requests as $request)
             {{ $request->title }}<br>
         @endforeach
+
+        @if(!empty($json))
+            <hr>
+            {{ $json['Title'] }}
+            <img src="{{ $json['Poster'] }}">
+        @endif
     </div>
     @else
     <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
