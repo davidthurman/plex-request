@@ -60,12 +60,6 @@ class RequestController extends Controller
 
         $data = $request->all();
         $requests = PlexRequest::all();
-        $newRequest = New PlexRequest;
-
-        $newRequest->year = $data['year'];
-        $newRequest->title = $data['title'];
-        $newRequest->userid = Auth::user()->id;
-        $newRequest->save();
 
         $validator = Validator::make($request->all(), [
             'title' => 'required'
@@ -75,9 +69,23 @@ class RequestController extends Controller
             return redirect()->back()
                 ->with(\Session::flash('failure', 'There was a problem. Your request was not submitted.'));
         } else {
-            return view('allRequests', compact('requests'));
-            return redirect()->back()->with(\Session::flash('success', 'Your request was received.'));
+
+            $newRequest = New PlexRequest;
+
+            $newRequest->year = $data['year'];
+            $newRequest->title = $data['title'];
+            $newRequest->userid = Auth::user()->id;
+            $newRequest->save();
+
+            return redirect()->route('userrequests')->with(\Session::flash('success', 'Your request was received.'));;
+
         }
+
+
+
+
+
+
 
     }
 }
