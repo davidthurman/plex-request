@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -23,4 +24,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function isAdmin() {
+
+        $user = Auth::user();
+
+        if($user->id == '1') {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }

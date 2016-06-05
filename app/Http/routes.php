@@ -1,16 +1,74 @@
  <?php
 
 /*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
+ * Admin routes
+ */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'admin'], function() {
+
+        Route::get('/admin', [
+            'as' => 'admin',
+            'uses' => 'RequestController@admin'
+        ]);
+
 });
+
+/*
+ * User routes
+ */
+
+Route::group(['middleware' => 'auth'], function() {
+
+    Route::get('/', [
+        'as' => 'home',
+        'uses' => 'RequestController@allRequests'
+    ]);
+
+    Route::get('/userrequests', [
+        'as' => 'userrequests',
+        'uses' => 'RequestController@userRequests'
+    ]);
+
+    Route::post('/submitrequest', [
+        'as' => 'submitrequest',
+        'uses' => 'RequestController@submit'
+    ]);
+
+    Route::get('/reporterror', [
+        'as' => 'reporterror',
+        'uses' => 'ErrorController@reportError'
+    ]);
+
+    Route::post('/submiterror', [
+        'as' => 'submiterror',
+        'uses' => 'ErrorController@submitError'
+    ]);
+
+});
+
+/*
+ * Public routes
+ */
+
+Route::get('register', [
+    'as' => 'register',
+    'uses' => 'AuthController@getRegister',
+]);
+
+Route::post('register', 'AuthController@postRegister');
+
+Route::get('login', [
+    'as' => 'login',
+    'uses' => 'AuthController@getLogin',
+]);
+
+Route::post('login', 'AuthController@postLogin');
+
+Route::get('logout', [
+    'as' => 'logout',
+    'uses' => 'AuthController@getLogout',
+]);
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
