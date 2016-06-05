@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Http\Response;
 use App\serverError;
 use App\PlexRequest;
 use Validator;
 use Auth;
+use Input;
 
 class RequestController extends Controller
 {
@@ -34,9 +36,23 @@ class RequestController extends Controller
 
     }
 
-    public function searchRequest() {
+    public function searchRequest(Request $request, Response $response) {
 
-        return 'searching api';
+        $currentUserID = Auth::user()->id;
+        
+        $requests = PlexRequest::where('userid', '=', $currentUserID)->get();
+
+        $data = $request->all();
+
+        $title = $data['title'];
+
+        $url = "http://www.omdbapi.com/?t=" . $title . "&y=&plot=short&r=json";
+
+        $json = json_decode(file_get_contents($url), true);
+
+//        return $json;
+
+        return view('searchResults', compact('json'));
 
     }
 
