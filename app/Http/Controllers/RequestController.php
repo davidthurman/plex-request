@@ -38,21 +38,15 @@ class RequestController extends Controller
 
     public function searchRequest(Request $request, Response $response) {
 
-        $currentUserID = Auth::user()->id;
-        
-        $requests = PlexRequest::where('userid', '=', $currentUserID)->get();
-
         $data = $request->all();
 
         $title = $data['title'];
 
         $title = rawurlencode($title);
 
-        $url = "http://www.omdbapi.com/?t=" . $title . "&y=&plot=short&r=json";
+        $url = "http://www.omdbapi.com/?s=" . $title . "&r=json";
 
         $json = json_decode(file_get_contents($url), true);
-
-//        return $json;
 
         return view('searchResults', compact('json'));
 
@@ -61,7 +55,6 @@ class RequestController extends Controller
     public function submit(Request $request) {
 
         $data = $request->all();
-        $requests = PlexRequest::all();
 
         $validator = Validator::make($request->all(), [
             'title' => 'required'

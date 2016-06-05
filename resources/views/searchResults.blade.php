@@ -6,19 +6,17 @@
             @include('partials.requestform')
 
             @if(!empty($json))
-                <hr>
-                <form role="form" method="POST" action="{{ route('submitrequest') }}">
-                    {{ csrf_field() }}
-                <div>
-                    <input type ="image" src="{{ $json['Poster'] }}" required>
-                    <input id="title" hidden="true" name="title" readonly="readonly" value="{{ $json['Title'] }}">
-                    <input id="year" hidden="true" name="year" readonly="readonly" value="{{ $json['Year'] }}">
-                    <h3>{{ $json['Title'] }}</h3>
-                  
-
-                </div>
-                
-                <h3>{{ $json['Year'] }}</h3>
+                @foreach ($json['Search'] as $movie)
+                    <form role="form" method="POST" action="{{ route('submitrequest') }}">
+                        {{ csrf_field() }}
+                        <div class="col-xs-12 col-md-4">
+                            <input type="image" src="{{ $movie['Poster'] }}" required><br>
+                            <input id="title" hidden="true" name="title" readonly="readonly" value="{{ $movie['Title'] }}">
+                            <input id="year" hidden="true" name="year" readonly="readonly" value="{{ $movie['Year'] }}">
+                            {{ $movie['Title'] . " - " . $movie['Year'] }}
+                        </div>
+                    </form>
+                @endforeach
             @endif
         </div>
     @endif
