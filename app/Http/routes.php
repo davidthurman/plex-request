@@ -11,6 +11,11 @@ Route::group(['middleware' => 'admin'], function() {
             'uses' => 'RequestController@admin'
         ]);
 
+        Route::post('/deleterequest', [
+            'as' => 'deleterequest',
+            'uses' => 'RequestController@destroy'
+        ]);
+
 });
 
 /*

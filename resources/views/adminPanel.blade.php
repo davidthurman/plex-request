@@ -25,9 +25,12 @@
             <hr>
             @if(!$requests->isEmpty())
                 <h2>Current requests:</h2>
-                @foreach ($requests as $request)
-                    {{ $request->title }}<br>
-                @endforeach
+                <form method="POST" action="{{ route('deleterequest') }}">
+                    @foreach ($requests as $request)
+                        {{ $request->title }}<br><span class="pull-right"><a href="{{ route('deleterequest') }}">x</a></span>
+                        <hr>
+                    @endforeach
+                </form>
             @else
                 <h2>No requests submitted.</h2>
             @endif

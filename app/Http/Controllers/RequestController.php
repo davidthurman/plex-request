@@ -48,7 +48,30 @@ class RequestController extends Controller
 
         $json = json_decode(file_get_contents($url), true);
 
-        return view('searchResults', compact('json'));
+        $movieIDs = array();
+        
+        foreach($json['Search'] as $movie) {
+
+            $movieIDs[] = $movie['imdbID'];
+
+        }
+
+        foreach($movieIDs as $imdbID) {
+
+            $needle = '{{imdbID}}';
+
+            $haystack = 'http://img.omdbapi.com/?i={{imdbID}}&apikey=' . env('OMDB_KEY');
+
+            $links[] = str_replace($needle, $imdbID, $haystack);
+
+        }
+        
+
+//        $jsonWithImages = array_merge($json, $links);
+//
+//        return $jsonWithImages;
+
+        return view('searchResults', compact('links'));
 
     }
 
@@ -76,11 +99,11 @@ class RequestController extends Controller
 
         }
 
+    }
 
+    public function destroy($id) {
 
-
-
-
+        return 'deleted';
 
     }
 }
