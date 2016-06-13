@@ -5,17 +5,18 @@
     <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
         @include('partials.requestform')
         <h2>Your unfulfilled requests:</h2>
-
-        @foreach($requests as $request)
-            {{ $request->year }}: {{ $request->title }}<br>
-
-        @endforeach
-
-        @if(!empty($json))
-            <hr>
-            {{ $json['Title'] }}
-            <img src="{{ $json['Poster'] }}">
-        @endif
+        <table class="table table-hover table-bordered">
+            <tr class="active">
+                <td>Title:</td>
+                <td>Year:</td>
+            </tr>
+            @foreach($requests as $request)
+                <tr>
+                    <td>{{ $request->title }}</td>
+                    <td>{{ $request->year }}</td>
+                </tr>
+            @endforeach
+        </table>
     </div>
     @else
     <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">

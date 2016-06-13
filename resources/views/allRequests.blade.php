@@ -4,11 +4,19 @@
     @if (Auth::check())
     <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
         @include('partials.requestform')
-        <h2>Hello {{ Auth::user()->name }}! Here is a list of all unfulfilled requests:</h2>
-
-        @foreach($requests as $request)
-            {{ $request->title }} - {{ $request->year }}<br>
-        @endforeach
+        <h2>All current requests:</h2>
+        <table class="table table-hover table-bordered">
+            <tr class="active">
+                <td>Title:</td>
+                <td>Year:</td>
+            </tr>
+            @foreach($requests as $request)
+                <tr>
+                    <td>{{ $request->title }}</td>
+                    <td>{{ $request->year }}</td>
+                </tr>
+            @endforeach
+        </table>
     </div>
     @else
     <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">

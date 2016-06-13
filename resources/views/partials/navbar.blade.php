@@ -5,6 +5,9 @@
                 <a href="/">
                     <img class="plexlogo" src="{{ asset('/images/plexlogo.png') }}">
                 </a>
+                @if(Auth::check())
+                    Welcome, {{ Auth::user()->name }}!
+                @endif
             </div>
             <ul class="nav navbar-nav pull-right">
                 @if (Auth::user()->isAdmin())

@@ -29,7 +29,7 @@ class User extends Authenticatable
 
         $user = Auth::user();
 
-        if($user->id == '1') {
+        if($user->id == '1' || $user->admin == 1) {
             return true;
         } else {
             return false;

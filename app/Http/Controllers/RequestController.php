@@ -10,6 +10,7 @@ use App\PlexRequest;
 use Validator;
 use Auth;
 use Input;
+use App\User;
 
 class RequestController extends Controller
 {
@@ -32,7 +33,8 @@ class RequestController extends Controller
 
         $errors = serverError::all();
         $requests = PlexRequest::all();
-        return view('adminPanel', compact('errors', 'requests'));
+        $users = User::all();
+        return view('adminPanel', compact('errors', 'requests', 'users'));
 
     }
 
