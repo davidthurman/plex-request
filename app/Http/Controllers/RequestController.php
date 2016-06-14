@@ -50,34 +50,13 @@ class RequestController extends Controller
 
         $json = json_decode(file_get_contents($url), true);
 
-        $movieIDs = array();
-        
-        foreach($json['Search'] as $movie) {
-
-            $movieIDs[] = $movie['imdbID'];
-
-        }
-
-        foreach($movieIDs as $imdbID) {
-
-            $needle = '{{imdbID}}';
-
-            $haystack = 'http://img.omdbapi.com/?i={{imdbID}}&apikey=' . env('OMDB_KEY');
-
-            $links[] = str_replace($needle, $imdbID, $haystack);
-
-        }
-        
-
-//        $jsonWithImages = array_merge($json, $links);
-//
-//        return $jsonWithImages;
-
-        return view('searchResults', compact('links'));
+        return view('searchResults', compact('json'));
 
     }
 
-    public function submit(Request $request) {
+    public function submit(Request $request, $movie) {
+
+        return $movie;
 
         $data = $request->all();
 
@@ -95,6 +74,7 @@ class RequestController extends Controller
             $newRequest->year = $data['year'];
             $newRequest->title = $data['title'];
             $newRequest->userid = Auth::user()->id;
+            $newRequest->user = Auth::user()->name;
             $newRequest->save();
 
             return redirect()->route('userrequests')->with(\Session::flash('success', 'Your request was received.'));;

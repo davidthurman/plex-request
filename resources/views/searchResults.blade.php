@@ -4,32 +4,24 @@
     @if (Auth::check())
         <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
             @include('partials.requestform')
-
-            @if(!empty($links))
-                @foreach ($links as $link)
-                    <form role="form" method="POST" action="{{ route('submitrequest') }}">
-                        {{ csrf_field() }}
-                        <div class="col-xs-12 col-md-4">
-                            <input type="image" src="{{ $link }}" required><br>
-                            {{--<input id="title" hidden="true" name="title" readonly="readonly" value="{{ $movie['Title'] }}">--}}
-                            {{--<input id="year" hidden="true" name="year" readonly="readonly" value="{{ $movie['Year'] }}">--}}
-                            {{--{{ $movie['Title'] . " - " . $movie['Year'] }}--}}
-                        </div>
-                    </form>
+            <h2>Search results:</h2>
+            <br>
+            <table class="table table-bordered table-hover">
+                <tr class="active">
+                    <td>Release:</td>
+                    <td>Title:</td>
+                    <td>IMDB</td>
+                    <td>Submit:</td>
+                </tr>
+                @foreach($json['Search'] as $movie)
+                    <tr>
+                        <td>{{ $movie['Year'] }}</td>
+                        <td>{{ $movie['Title'] }}</td>
+                        <td><a href="http://imdb.com/title/{{ $movie['imdbID'] }}">Link</a></td>
+                        <td class="text-center"><a href="{{ route('submitrequest', $movie) }}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></td>
+                    </tr>
                 @endforeach
-
-
-                {{--@foreach($json['Search'] as $key=>$value)--}}
-
-                    {{--{{ $link = $json[(string)$key] }}--}}
-
-                    {{--<img src="{{ $json[(string)$key] }}">--}}
-
-
-                {{--@endforeach--}}
-
-
-            @endif
+            </table>
         </div>
     @endif
 @stop
