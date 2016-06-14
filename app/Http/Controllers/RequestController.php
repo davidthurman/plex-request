@@ -103,8 +103,9 @@ class RequestController extends Controller
 
     }
 
-    public function destroy($id) {
-
+    public function destroy(Request $request) {
+        $data = $request->all();
+        return $data['id'];
         return 'deleted';
 
     }
