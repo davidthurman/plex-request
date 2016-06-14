@@ -56,6 +56,7 @@
                 <br>
                 <table class="table table-hover table-bordered">
                     <form method="POST" action="{{ route('deleterequest') }}">
+                        {{ csrf_field() }}
                         <tr class="active">
                             <td>Title:</td>
                             <td>Delete?</td>
@@ -63,7 +64,7 @@
                         @foreach ($requests as $request)
                             <tr>
                                 <td>{{ $request->title }}</td>
-                                <td><a href="{{ route('deleterequest') }}">x</a></td>
+                                <td><input id="id" name="id" hidden="true" value="{{ $request->title }}"><button>x</button></input></td>
                             </tr>
                         @endforeach
                     </form>
