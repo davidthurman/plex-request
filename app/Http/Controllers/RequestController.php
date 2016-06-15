@@ -77,7 +77,7 @@ class RequestController extends Controller
             $newRequest->user = Auth::user()->name;
             $newRequest->save();
 
-            return redirect()->route('userrequests')->with(\Session::flash('success', 'Your request was received.'));;
+            return redirect()->route('userrequests')->with(\Session::flash('success', 'Your request was received.'));
 
         }
 
@@ -85,8 +85,8 @@ class RequestController extends Controller
 
     public function destroy(Request $request) {
         $data = $request->all();
-        return $data['id'];
-        return 'deleted';
-
+        //$id = PlexRequest::findOrFail($data['id']);
+        //$id->delete();
+        return redirect()->route('admin')->with(\Session::flash('success', 'Request was removed.'));
     }
 }
