@@ -55,19 +55,21 @@
                 <h2>Current requests:</h2>
                 <br>
                 <table class="table table-hover table-bordered">
-                    <form method="POST" action="{{ route('deleterequest') }}">
-                        {{ csrf_field() }}
+                    
                         <tr class="active">
                             <td>Title:</td>
                             <td>Delete?</td>
                         </tr>
                         @foreach ($requests as $request)
+                        <form method="POST" action="{{ route('deleterequest') }}">
+                        {{ csrf_field() }}
                             <tr>
                                 <td>{{ $request->title }}</td>
-                                <td><input id="id" name="id" hidden="true" value="{{ $request->title }}"><button>x</button></input></td>
+                                <td><input ID="id" name="id" hidden="true" value="{{ $request->title }}"><button>x</button></input></td>
                             </tr>
+                            </form>
                         @endforeach
-                    </form>
+                    
                 </table>
             @else
                 <h2>No requests submitted.</h2>
