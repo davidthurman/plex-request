@@ -54,39 +54,32 @@ class RequestController extends Controller
 
     }
 
-    public function submit(Request $request, $movie) {
+    public function submit($imdbID) {
 
-        return $movie;
+        $url = "http://www.omdbapi.com/?i=" . $imdbID . "&r=json";
 
-        $data = $request->all();
+        $omdbJson = json_decode(file_get_contents($url), true);
 
-        $validator = Validator::make($request->all(), [
-            'title' => 'required'
-        ]);
+        $newRequest = New PlexRequest;
 
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->with(\Session::flash('failure', 'There was a problem. Your request was not submitted.'));
-        } else {
-
-            $newRequest = New PlexRequest;
-
-            $newRequest->year = $data['year'];
-            $newRequest->title = $data['title'];
-            $newRequest->userid = Auth::user()->id;
-            $newRequest->user = Auth::user()->name;
-            $newRequest->save();
-
+        $newRequest->year = $omdbJson['Year'];
+        $newRequest->title = $omdbJson['Title'];
+        $newRequest->userid = Auth::user()->id;
+        $newRequest->user = Auth::user()->name;
+        if($newRequest->save()) {
             return redirect()->route('userrequests')->with(\Session::flash('success', 'Your request was received.'));
-
+        } else {
+            return redirect()->back()->with(\Session::flash('failure', 'There was a problem. Your request was not submitted.'));
         }
 
     }
 
-    public function destroy(Request $request) {
-        $data = $request->all();
-        //$id = PlexRequest::findOrFail($data['id']);
-        //$id->delete();
-        return redirect()->route('admin')->with(\Session::flash('success', 'Request was removed.'));
+    public function destroy($id) {
+        $request = PlexRequest::findOrFail($id);
+        if ($request->delete()) {
+            return redirect()->back()->with(\Session::flash('success', 'Request has been deleted.'));
+        } else {
+            return redirect()->back()->with(\Session::flash('failure', 'There was a problem. The request was not deleted.'));
+        }
     }
 }

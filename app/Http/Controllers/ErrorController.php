@@ -42,4 +42,15 @@ class ErrorController extends Controller
         return redirect()->back()
             ->with(\Session::flash('success', 'Error has been submitted and I will look into it.'));
     }
+
+    public function destroy($id) {
+
+        $error = serverError::findOrFail($id);
+
+        if ($error->delete()) {
+            return redirect()->back()->with(\Session::flash('success', 'Error has been deleted.'));
+        } else {
+            return redirect()->back()->with(\Session::flash('failure', 'There was a problem. The error was not deleted.'));
+        }
+    }
 }

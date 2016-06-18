@@ -4,6 +4,10 @@ body {
     color: black;
 }
 
+.noDisplay {
+    display: none;
+}
+
 .btn-primary {
     color: black;
     background-color: #ff8a00;

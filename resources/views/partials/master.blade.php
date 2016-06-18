@@ -22,5 +22,6 @@
                     .slideUp("slow");
             });
         </script>
+        @yield('jsadditions')
     </body>
 </html>

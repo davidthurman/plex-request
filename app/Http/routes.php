@@ -11,9 +11,14 @@ Route::group(['middleware' => 'admin'], function() {
             'uses' => 'RequestController@admin'
         ]);
 
-        Route::post('/deleterequest', [
+        Route::get('/deleterequest/{id}', [
             'as' => 'deleterequest',
             'uses' => 'RequestController@destroy'
+        ]);
+
+        Route::get('/deleteerror/{id}', [
+            'as' => 'deleteerror',
+            'uses' => 'ErrorController@destroy'
         ]);
 
 });
@@ -39,7 +44,7 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'RequestController@searchRequest'
     ]);
 
-    Route::post('/submitrequest', [
+    Route::get('/submitrequest/{imdbID}', [
         'as' => 'submitrequest',
         'uses' => 'RequestController@submit'
     ]);
@@ -80,5 +85,3 @@ Route::get('logout', [
 ]);
 
 Route::auth();
-
-Route::get('/home', 'HomeController@index');

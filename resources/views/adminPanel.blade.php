@@ -2,7 +2,7 @@
 
 @section('content')
     @if (Auth::check())
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-md-8">
             @if(!$users->isEmpty())
             <h2>Users:</h2>
             <br>
@@ -18,13 +18,13 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>
-                            @if($user->admin == 1)
+                            @if($user->admin == 1 or $user->id == 1)
                                 Yes
                             @else
                                 No
                             @endif
                         </td>
-                        <td><input type="checkbox"></td>
+                        <td><input id="adminCheckbox" type="checkbox" @if($user->admin == 1 or $user->id == 1) checked @endif><a class="adminSubmit noDisplay">SUBMIT</a></td>
                     </tr>
                 @endforeach
             </table>
@@ -37,12 +37,14 @@
                     <td>Name:</td>
                     <td>Date:</td>
                     <td>Description:</td>
+                    <td>Delete?</td>
                 </tr>
                 @foreach ($errors as $error)
                 <tr>
                     <td>{{ $error->name }}</td>
                     <td>{{ $error->date }}</td>
                     <td>{{ $error->description }}</td>
+                    <td class="text-center"><a href="{{ route('deleteerror', $error->id) }}"><button>x</button></a></td>
                 </tr>
                 @endforeach
             </table>
@@ -50,7 +52,7 @@
             <h2>No errors reported.</h2>
             @endif
         </div>
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-md-4">
             @if(!$requests->isEmpty())
                 <h2>Current requests:</h2>
                 <br>
@@ -61,13 +63,10 @@
                             <td>Delete?</td>
                         </tr>
                         @foreach ($requests as $request)
-                        <form method="POST" action="{{ route('deleterequest') }}">
-                        {{ csrf_field() }}
                             <tr>
                                 <td>{{ $request->title }}</td>
-                                <td><input ID="id" name="id" hidden="true" value="{{ $request->title }}"><button>x</button></input></td>
+                                <td class="text-center"><a href="{{ route('deleterequest', $request->id) }}"><button>x</button></a></td>
                             </tr>
-                            </form>
                         @endforeach
                     
                 </table>
@@ -80,4 +79,11 @@
             <h2>You shouldn't be seeing this, someone messed up.</h2>
         </div>
     @endif
+    @section('jsadditions')
+        <script type="text/javascript">
+            $('#adminCheckbox').click(function() {
+                $( ".adminSubmit" ).removeClass( "noDisplay" );
+            });
+        </script>
+    @stop
 @stop

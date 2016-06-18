@@ -18,7 +18,7 @@
                         <td>{{ $movie['Year'] }}</td>
                         <td>{{ $movie['Title'] }}</td>
                         <td><a href="http://imdb.com/title/{{ $movie['imdbID'] }}">Link</a></td>
-                        <td class="text-center"><a href="{{ route('submitrequest', $movie) }}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></td>
+                        <td class="text-center"><a href="{{ route('submitrequest', $movie['imdbID']) }}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></td>
                     </tr>
                 @endforeach
             </table>
