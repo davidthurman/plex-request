@@ -22,7 +22,4 @@ Allows people to request movies or tv shows to be added to your Plex server. Als
 
 - Add pagination or infinite scroll w/ lazy loading
 - Fix spacing issues
-- Make it prettier
-- Add imdb thumbnails w/ their api
 - Allow admin to designate other accounts as admin
-- Allow deletion of requests/errors from admin panel
