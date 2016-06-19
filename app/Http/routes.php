@@ -70,23 +70,30 @@ Route::group(['middleware' => 'auth'], function() {
  * Public routes
  */
 
-Route::get('register', [
-    'as' => 'register',
-    'uses' => 'AuthController@getRegister',
-]);
+ Route::get('register', [
+     'as' => 'register',
+     'uses' => 'Auth\AuthController@getRegister',
+ ]);
 
-Route::post('register', 'AuthController@postRegister');
+
 
 Route::get('login', [
     'as' => 'login',
-    'uses' => 'AuthController@getLogin',
+    'uses' => 'Auth\AuthController@getLogin',
 ]);
 
-Route::post('login', 'AuthController@postLogin');
+Route::post('login', 'Auth\AuthController@postLogin');
 
 Route::get('logout', [
     'as' => 'logout',
-    'uses' => 'AuthController@getLogout',
+    'uses' => 'Auth\AuthController@getLogout',
 ]);
 
 Route::auth();
+
+
+Route::group(['middleware' => 'registration'], function() {
+
+    Route::post('register', 'Auth\AuthController@postRegister');
+
+});
