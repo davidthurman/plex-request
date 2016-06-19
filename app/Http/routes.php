@@ -11,6 +11,11 @@ Route::group(['middleware' => 'admin'], function() {
             'uses' => 'RequestController@admin'
         ]);
 
+        Route::post('/editadmin', [
+            'as' => 'editadmin',
+            'uses' => 'RequestController@editadmin'
+        ]);
+
         Route::get('/deleterequest/{id}', [
             'as' => 'deleterequest',
             'uses' => 'RequestController@destroy'

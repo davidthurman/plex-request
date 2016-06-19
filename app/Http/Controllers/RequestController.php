@@ -82,4 +82,17 @@ class RequestController extends Controller
             return redirect()->back()->with(\Session::flash('failure', 'There was a problem. The request was not deleted.'));
         }
     }
+
+    public function editadmin(Request $request) {
+
+        $inputs = $request->input('admincheckbox');
+
+        foreach ($inputs as $uid => $value) {
+            $user = User::find($uid);
+            $user->admin= $value;
+            $user->save();
+        }
+
+        return redirect()->back()->with(\Session::flash('success', 'Changes saved.'));
+    }
 }

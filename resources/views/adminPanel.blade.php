@@ -6,28 +6,34 @@
             @if(!$users->isEmpty())
             <h2>Users:</h2>
             <br>
-            <table class="table table-hover table-bordered">
-                <tr class="active">
-                    <td>ID</td>
-                    <td>Name</td>
-                    <td>Admin?</td>
-                    <td>Give admin?</td>
-                </tr>
-                @foreach($users as $user)
-                    <tr>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>
-                            @if($user->admin == 1 or $user->id == 1)
-                                Yes
-                            @else
-                                No
-                            @endif
-                        </td>
-                        <td><input id="adminCheckbox" type="checkbox" @if($user->admin == 1 or $user->id == 1) checked @endif><a class="adminSubmit noDisplay">SUBMIT</a></td>
+            <form method="POST" action="{{ route('editadmin') }}">
+                {!! csrf_field() !!}
+                <table class="table table-hover table-bordered">
+                    <tr class="active">
+                        <td>ID</td>
+                        <td>Name</td>
+                        <td>Admin?</td>
+                        <td><button class="btn btn-primary">Submit</button></td>
                     </tr>
-                @endforeach
-            </table>
+                    @foreach($users as $user)
+                        <tr>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>
+                                @if($user->admin == 1 or $user->id == 1)
+                                    Yes
+                                @else
+                                    No
+                                @endif
+                            </td>
+                            <td>
+                                <input type="hidden" id="admincheckbox" name="admincheckbox[{{$user->id}}]" value="0">
+                                <input type="checkbox" id="admincheckbox" name="admincheckbox[{{$user->id}}]" value="1" @if($user->admin or $user->id ==1) checked @endif>
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
+            </form>
             @endif
             @if(!$errors->isEmpty())
             <h2>Reported errors:</h2>
@@ -79,11 +85,4 @@
             <h2>You shouldn't be seeing this, someone messed up.</h2>
         </div>
     @endif
-    @section('jsadditions')
-        <script type="text/javascript">
-            $('#adminCheckbox').click(function() {
-                $( ".adminSubmit" ).removeClass( "noDisplay" );
-            });
-        </script>
-    @stop
 @stop
