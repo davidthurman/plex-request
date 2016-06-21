@@ -17,3 +17,15 @@ Allows people to request movies or tv shows to be added to your Plex server. Als
 - cd into the project dir on your local machine, run 'vagrant up', and let the box provision. 
 - Once the box is up and running, 'vagrant ssh' into the box, 'cd /var/www' and run 'php artisan migrate' to create the necessary tables.
 - Access the app in your browser at http://192.168.33.10/ or update your hosts file and map your desired hostname to the IP previously mentioned. 
+
+###To do:
+
+- Sanitize form input.
+- Remove 'all requests' view, users can only see their submissions.
+- Homepage = search, no more partial.
+- Get emailed when new submission comes in.
+- Separate admin view for users.
+- Attach username to requests.
+- Remove name field from error form, insert from auth.
+- Images return from search.
+- Approve/deny and attach messages to requests.

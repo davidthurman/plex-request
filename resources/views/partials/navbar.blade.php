@@ -13,8 +13,8 @@
                 @if (Auth::user()->isAdmin())
                     <li><a href="/admin">Admin</a></li>
                 @endif
-                <li><a href="/">All requests</a></li>
-                <li><a href="/userrequests">Your requests</a></li>
+                <li><a href="/search">Search</a></li>
+                <li><a href="/userrequests">Requests</a></li>
                 <li><a href="/reporterror">Report error</a></li>
                 <li><a href="/logout">Log out</a></li>
             </ul>
@@ -24,7 +24,7 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a href="/">
+                <a href="/search">
                     <img class="plexlogo" src="{{ asset('/images/plexlogo.png') }}">
                 </a>
             </div>

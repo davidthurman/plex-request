@@ -34,19 +34,19 @@ Route::group(['middleware' => 'admin'], function() {
 
 Route::group(['middleware' => 'auth'], function() {
 
-    Route::get('/', [
-        'as' => 'home',
-        'uses' => 'RequestController@allRequests'
-    ]);
-
-    Route::get('/userrequests', [
-        'as' => 'userrequests',
-        'uses' => 'RequestController@userRequests'
+    Route::get('/search', [
+        'as' => 'search',
+        'uses' => 'RequestController@searchPage'
     ]);
 
     Route::post('/searchrequest', [
         'as' => 'searchrequest',
         'uses' => 'RequestController@searchRequest'
+    ]);
+
+    Route::get('/userrequests', [
+        'as' => 'userrequests',
+        'uses' => 'RequestController@userRequests'
     ]);
 
     Route::get('/submitrequest/{imdbID}', [

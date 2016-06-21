@@ -12,7 +12,7 @@ use Auth;
 class ErrorController extends Controller
 {
     public function reportError() {
-        return view('reportError');
+        return view('reporterror');
     }
 
     public function submitError(Request $request, Response $response) {

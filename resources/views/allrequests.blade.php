@@ -3,7 +3,6 @@
 @section('content')
     @if (Auth::check())
     <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
-        @include('partials.requestform')
         <h2>All current requests:</h2>
         <table class="table table-hover table-bordered">
             <tr class="active">

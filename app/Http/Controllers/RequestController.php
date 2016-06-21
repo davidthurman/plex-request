@@ -14,18 +14,12 @@ use App\User;
 
 class RequestController extends Controller
 {
-    public function allRequests() {
-
-        $requests = PlexRequest::all();
-        return view('allRequests', compact('requests'));
-
-    }
 
     public function userRequests() {
 
         $currentUserID = Auth::user()->id;
         $requests = PlexRequest::where('userid', '=', $currentUserID)->get();
-        return view('userRequests', compact('requests'));
+        return view('userrequests', compact('requests'));
 
     }
 
@@ -34,8 +28,12 @@ class RequestController extends Controller
         $errors = serverError::all();
         $requests = PlexRequest::all();
         $users = User::all();
-        return view('adminPanel', compact('errors', 'requests', 'users'));
+        return view('adminpanel', compact('errors', 'requests', 'users'));
 
+    }
+
+    public function searchPage() {
+        return view('searchpage');
     }
 
     public function searchRequest(Request $request, Response $response) {
@@ -50,7 +48,7 @@ class RequestController extends Controller
 
         $json = json_decode(file_get_contents($url), true);
 
-        return view('searchResults', compact('json'));
+        return view('searchresults', compact('json'));
 
     }
 
