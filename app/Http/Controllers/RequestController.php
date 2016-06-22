@@ -15,20 +15,24 @@ use App\User;
 class RequestController extends Controller
 {
 
-    public function userRequests() {
-
-        $currentUserID = Auth::user()->id;
-        $requests = PlexRequest::where('userid', '=', $currentUserID)->get();
-        return view('userrequests', compact('requests'));
-
-    }
-
     public function admin() {
 
         $errors = serverError::all();
         $requests = PlexRequest::all();
         $users = User::all();
         return view('adminpanel', compact('errors', 'requests', 'users'));
+
+    }
+
+
+
+    public function userRequests() {
+
+        $currentUserID = Auth::user()->id;
+
+        $requests = PlexRequest::where('userid', '=', $currentUserID)->get();
+        
+        return view('userrequests', compact('requests'));
 
     }
 
@@ -64,6 +68,7 @@ class RequestController extends Controller
         $newRequest->title = $omdbJson['Title'];
         $newRequest->userid = Auth::user()->id;
         $newRequest->user = Auth::user()->name;
+        $newRequest->imdbid = $imdbID;
         if($newRequest->save()) {
             return redirect()->route('userrequests')->with(\Session::flash('success', 'Your request was received.'));
         } else {
@@ -81,16 +86,4 @@ class RequestController extends Controller
         }
     }
 
-    public function editadmin(Request $request) {
-
-        $inputs = $request->input('admincheckbox');
-
-        foreach ($inputs as $uid => $value) {
-            $user = User::find($uid);
-            $user->admin= $value;
-            $user->save();
-        }
-
-        return redirect()->back()->with(\Session::flash('success', 'Changes saved.'));
-    }
 }

@@ -21,11 +21,6 @@ Allows people to request movies or tv shows to be added to your Plex server. Als
 ###To do:
 
 - Sanitize form input.
-- Remove 'all requests' view, users can only see their submissions.
-- Homepage = search, no more partial.
 - Get emailed when new submission comes in.
-- Separate admin view for users.
-- Attach username to requests.
-- Remove name field from error form, insert from auth.
 - Images return from search.
 - Approve/deny and attach messages to requests.

@@ -11,9 +11,19 @@ Route::group(['middleware' => 'admin'], function() {
             'uses' => 'RequestController@admin'
         ]);
 
-        Route::post('/editadmin', [
-            'as' => 'editadmin',
-            'uses' => 'RequestController@editadmin'
+        Route::get('/showuser/{id}', [
+            'as' => 'showuser',
+            'uses' => 'UsersController@showuser'
+        ]);
+
+        Route::post('/edituser', [
+            'as' => 'edituser',
+            'uses' => 'UsersController@edituser'
+        ]);
+
+        Route::get('/deleteuser/{id}', [
+            'as' => 'destroyuser',
+            'uses' => 'UsersController@destroy'
         ]);
 
         Route::get('/deleterequest/{id}', [
@@ -33,6 +43,11 @@ Route::group(['middleware' => 'admin'], function() {
  */
 
 Route::group(['middleware' => 'auth'], function() {
+
+    Route::get('/', [
+       'as' => 'home',
+       'uses' => 'RequestController@searchpage'
+    ]);
 
     Route::get('/search', [
         'as' => 'search',

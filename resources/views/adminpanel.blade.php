@@ -2,36 +2,33 @@
 
 @section('content')
     @if (Auth::check())
-        <div class="col-xs-12 col-md-8">
+        <div class="col-xs-12 col-md-7">
             @if(!$users->isEmpty())
             <h2>Users:</h2>
             <br>
-            <form method="POST" action="{{ route('editadmin') }}">
+            <form method="POST" action="{{ route('edituser') }}">
                 {!! csrf_field() !!}
                 <table class="table table-hover table-bordered">
                     <tr class="active">
                         <td>ID</td>
                         <td>Name</td>
                         <td>Admin?</td>
-                        <td><button class="btn btn-primary">Submit</button></td>
                     </tr>
                     @foreach($users as $user)
                         <tr>
                             <td>{{ $user->id }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>
-                                @if($user->admin == 1 or $user->id == 1)
-                                    Yes
-                                @else
-                                    No
-                                @endif
-                            </td>
+                            <td><a href="{{ route('showuser', $user->id) }}">{{ $user->name }}</a></td>
                             <td>
                                 <input type="hidden" id="admincheckbox" name="admincheckbox[{{$user->id}}]" value="0">
                                 <input type="checkbox" id="admincheckbox" name="admincheckbox[{{$user->id}}]" value="1" @if($user->admin or $user->id ==1) checked @endif>
                             </td>
                         </tr>
                     @endforeach
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><button class="btn btn-info">Submit</button></td>
+                    </tr>
                 </table>
             </form>
             @endif
@@ -58,7 +55,7 @@
             <h2>No errors reported.</h2>
             @endif
         </div>
-        <div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-md-5">
             @if(!$requests->isEmpty())
                 <h2>Current requests:</h2>
                 <br>
@@ -66,11 +63,13 @@
                     
                         <tr class="active">
                             <td>Title:</td>
+                            <td>User:</td>
                             <td>Delete?</td>
                         </tr>
                         @foreach ($requests as $request)
                             <tr>
-                                <td>{{ $request->title }}</td>
+                                <td><a href="http://imdb.com/title/{{ $request['imdbid'] }}" target="new">{{ $request->title }}</a></td>
+                                <td>{{ $request->user }}</td>
                                 <td class="text-center"><a href="{{ route('deleterequest', $request->id) }}"><button>x</button></a></td>
                             </tr>
                         @endforeach

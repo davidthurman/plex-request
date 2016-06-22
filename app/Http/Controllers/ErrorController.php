@@ -22,7 +22,6 @@ class ErrorController extends Controller
         $error = new serverError;
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|max:100',
             'date' => 'required',
             'description' => 'required|min:10|max:500',
         ]);
@@ -33,14 +32,14 @@ class ErrorController extends Controller
         }
 
         $error->userid = Auth::user()->id;
-        $error->name = $data['name'];
+        $error->name = Auth::user()->name;
         $error->date = $data['date'];
         $error->description = $data['description'];
 
         $error->save();
 
         return redirect()->back()
-            ->with(\Session::flash('success', 'Error has been submitted and I will look into it.'));
+            ->with(\Session::flash('success', 'Error has been submitted and I\'ll look into it.'));
     }
 
     public function destroy($id) {

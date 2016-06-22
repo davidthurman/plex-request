@@ -7,12 +7,12 @@
         <table class="table table-hover table-bordered">
             <tr class="active">
                 <td>Title:</td>
-                <td>Year:</td>
+                <td>Requested on:</td>
             </tr>
             @foreach($requests as $request)
                 <tr>
-                    <td>{{ $request->title }}</td>
-                    <td>{{ $request->year }}</td>
+                    <td><a href="http://imdb.com/title/{{ $request['imdbid'] }}" target="new">{{ $request->title }}</a></td>
+                    <td>{{ $request['created_at']}}</td>
                 </tr>
             @endforeach
         </table>

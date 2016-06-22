@@ -12,10 +12,6 @@
                                     {{ csrf_field() }}
                                     <br style="clear:both">
                                     <div class="form-group">
-                                        <label for="name">Your name:</label>
-                                        <input type="text" class="form-control" id="name" name="name" required autofocus>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="date">Date encountered:</label>
                                         <input type="date" class="form-control" id="date" name="date" required>
                                     </div>
