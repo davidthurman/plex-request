@@ -52,7 +52,16 @@ class RequestController extends Controller
 
         $json = json_decode(file_get_contents($url), true);
 
-        return view('searchresults', compact('json'));
+        if(array_key_exists('Error', $json)) {
+
+            return redirect()->route('search')->with(\Session::flash('failure', 'Your search returned no results.'));
+
+        } else {
+
+            return view('searchresults', compact('json'));
+
+        }
+
 
     }
 
