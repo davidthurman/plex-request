@@ -28,7 +28,7 @@ class ErrorController extends Controller
 
         if ($validator->fails()) {
             return redirect()->back()
-                ->with(\Session::flash('failure', 'There was an error submitting your... error. When it rains it pours, eh?'));
+                ->with(\Session::flash('failure', 'Both fields are required.'));
         }
 
         $error->userid = Auth::user()->id;
