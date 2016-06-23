@@ -24,3 +24,8 @@ Allows people to request movies or tv shows to be added to your Plex server. Als
 - Get emailed when new submission comes in.
 - Images return from search.
 - Approve/deny and attach messages to requests.
+- pre-fill date on error report.
+- format dates w/ mutator 
+- sticky forms 
+- highlight current nav area
+- admin redirect to admin area on login
