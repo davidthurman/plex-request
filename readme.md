@@ -1,6 +1,6 @@
 #plex-request
 
-Allows people to request movies or tv shows to be added to your Plex server. Also allows errors to be reported.
+A web app for people to submit requests for content to be added to a Plex server. Uses OMDB's API currently, but switching to TMDB for better movie poster support. 
 
 ###You will need:
 
@@ -24,8 +24,8 @@ Allows people to request movies or tv shows to be added to your Plex server. Als
 - Get emailed when new submission comes in.
 - Images return from search.
 - Approve/deny and attach messages to requests.
-- pre-fill date on error report.
-- format dates w/ mutator 
-- sticky forms 
-- highlight current nav area
-- admin redirect to admin area on login
+- Pre-fill date on error report.
+- Format dates w/ mutator.
+- Sticky forms.
+- Highlight current nav area.
+- Admin redirect to admin area on login.
