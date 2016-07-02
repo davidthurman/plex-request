@@ -90,9 +90,12 @@ class RequestController extends Controller
 
                 $to = 'dustin638@gmail.com';
                 $subject = 'New Plex Request';
-                $message = 'You\'ve received a new request.';
+                $message = 'You\'ve received a new request for ' . $newRequest->title . '.';
+                $headers = 'From: admin@plexrequest.net' . "\r\n" .
+                    'Reply-To: admin@plexrequest.net' . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
 
-                mail($to, $subject, $message);
+                mail($to, $subject, $message, $headers);
 
                 return redirect()->route('userrequests')->with(\Session::flash('success', 'Your request was received.'));
             } else {
