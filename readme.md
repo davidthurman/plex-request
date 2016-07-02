@@ -24,7 +24,6 @@ A web app for people to submit requests for content to be added to a Plex server
 - Get emailed when new submission comes in.
 - Images return from search.
 - Approve/deny and attach messages to requests.
-- Pre-fill date on error report.
 - Format dates w/ mutator.
 - Sticky forms.
 - Highlight current nav area.

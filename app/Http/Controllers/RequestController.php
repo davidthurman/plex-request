@@ -11,6 +11,8 @@ use Validator;
 use Auth;
 use Input;
 use App\User;
+use Mail;
+use Carbon\Carbon;
 
 class RequestController extends Controller
 {
@@ -40,7 +42,7 @@ class RequestController extends Controller
         return view('searchpage');
     }
 
-    public function searchRequest(Request $request, Response $response) {
+    public function searchRequest(Request $request) {
 
         $data = $request->all();
 
@@ -67,21 +69,39 @@ class RequestController extends Controller
 
     public function submit($imdbID) {
 
+        $this->imdbID = $imdbID;
+
         $url = "http://www.omdbapi.com/?i=" . $imdbID . "&r=json";
 
         $omdbJson = json_decode(file_get_contents($url), true);
 
-        $newRequest = New PlexRequest;
+        $request = PlexRequest::where('imdbid', '=', $imdbID)->first();
 
-        $newRequest->year = $omdbJson['Year'];
-        $newRequest->title = $omdbJson['Title'];
-        $newRequest->userid = Auth::user()->id;
-        $newRequest->user = Auth::user()->name;
-        $newRequest->imdbid = $imdbID;
-        if($newRequest->save()) {
-            return redirect()->route('userrequests')->with(\Session::flash('success', 'Your request was received.'));
+        if($request == null) {
+
+            $newRequest = New PlexRequest;
+
+            $newRequest->year = $omdbJson['Year'];
+            $newRequest->title = $omdbJson['Title'];
+            $newRequest->userid = Auth::user()->id;
+            $newRequest->user = Auth::user()->name;
+            $newRequest->imdbid = $imdbID;
+            if($newRequest->save()) {
+
+                $to = 'dustin638@gmail.com';
+                $subject = 'New Plex Request';
+                $message = 'You\'ve received a new request.';
+
+                mail($to, $subject, $message);
+
+                return redirect()->route('userrequests')->with(\Session::flash('success', 'Your request was received.'));
+            } else {
+                return redirect()->route('userrequests')->with(\Session::flash('failure', 'There was a problem. Your request was not submitted.'));
+            }
+
         } else {
-            return redirect()->back()->with(\Session::flash('failure', 'There was a problem. Your request was not submitted.'));
+
+            return redirect()->route('userrequests')->with(\Session::flash('failure', 'There is already a pending request for that title.'));
         }
 
     }

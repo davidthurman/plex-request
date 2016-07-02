@@ -18,7 +18,7 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 $("#flashMessage")
-                    .delay(4000)
+                    .delay(5000)
                     .slideUp("slow");
             });
         </script>

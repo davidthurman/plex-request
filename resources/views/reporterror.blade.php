@@ -13,7 +13,7 @@
                                     <br style="clear:both">
                                     <div class="form-group">
                                         <label for="date">Date encountered:</label>
-                                        <input type="date" class="form-control" id="date" name="date" required>
+                                        <input type="date" class="form-control" id="date" name="date" value="{{ date('Y-m-d') }}" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="description">Describe the error:</label>
