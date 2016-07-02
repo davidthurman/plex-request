@@ -69,7 +69,7 @@ class RequestController extends Controller
 
     public function submit($imdbID) {
 
-        $this->imdbID = $imdbID;
+        $this->imdbID = filter_var($imdbID, FILTER_SANITIZE_STRING);
 
         $url = "http://www.omdbapi.com/?i=" . $imdbID . "&r=json";
 
@@ -104,7 +104,7 @@ class RequestController extends Controller
 
         } else {
 
-            return redirect()->route('userrequests')->with(\Session::flash('failure', 'There is already a pending request for that title.'));
+            return redirect()->route('search')->with(\Session::flash('failure', 'There is already a pending request for that title.'));
         }
 
     }
