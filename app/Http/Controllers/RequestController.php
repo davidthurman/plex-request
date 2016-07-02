@@ -88,7 +88,7 @@ class RequestController extends Controller
             $newRequest->imdbid = $imdbID;
             if($newRequest->save()) {
 
-                $to = 'dustin638@gmail.com';
+                $to = env('ADMIN_EMAIL');
                 $subject = 'New Plex Request';
                 $message = 'You\'ve received a new request for ' . $newRequest->title . '.';
                 $headers = 'From: admin@plexrequest.net' . "\r\n" .
