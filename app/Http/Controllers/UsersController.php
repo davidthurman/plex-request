@@ -26,8 +26,9 @@ class UsersController extends Controller
     public function showuser($id) {
 
         $user = User::findOrFail($id);
+        $activepage = 'admin';
 
-        return view('showuser', compact('user'));
+        return view('showuser', compact('user', 'activepage'));
 
     }
 

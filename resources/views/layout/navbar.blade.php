@@ -18,11 +18,11 @@
             <div class="collapse navbar-collapse" id="plexnavbar">
                 <ul class="nav navbar-nav pull-right">
                     @if (Auth::user()->isAdmin())
-                        <li><a href="/admin">Admin</a></li>
+                        <li @if($activepage == 'admin')class="activepage"@endif><a href="/admin">Admin</a></li>
                     @endif
-                    <li><a href="/search">Search</a></li>
-                    <li><a href="/userrequests">Requests</a></li>
-                    <li><a href="/reporterror">Report error</a></li>
+                    <li @if($activepage == 'search')class="activepage"@endif><a href="/search">Search</a></li>
+                    <li @if($activepage == 'userrequests')class="activepage"@endif><a href="/userrequests">Requests</a></li>
+                    <li @if($activepage == 'reporterror')class="activepage"@endif><a href="/reporterror">Report error</a></li>
                     <li><a href="/logout">Log out</a></li>
                 </ul>
             </div>

@@ -1,4 +1,4 @@
-@extends('partials.master')
+@extends('layout.master')
 
 <!-- Main Content -->
 @section('content')

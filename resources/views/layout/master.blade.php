@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Plex Requests</title>
+        <title>@yield('title') | Plex Requests</title>
         <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="container">
-            @include('partials.navbar')
+            @include('layout.navbar')
             @include('partials.success')
             @include('partials.failure')
             @yield('content')

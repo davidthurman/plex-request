@@ -1,5 +1,5 @@
-@extends('partials.master')
-
+@extends('layout.master')
+@section('title')Page not found! @stop
 @section('content')
     <div class="container">
         <div class="row">

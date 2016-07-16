@@ -1,9 +1,8 @@
-@extends('partials.master')
-
+@extends('layout.master')
+@section('title')Admin @stop
 @section('content')
-    @if (Auth::check())
-        <div class="col-xs-12 col-md-7">
-            @if(!$users->isEmpty())
+    @if(!$users->isEmpty())
+        <div class="col-xs-12 col-md-10 col-md-offset-1">
             <h2>Users:</h2>
             <br>
             <form method="POST" action="{{ route('edituser') }}">
@@ -31,8 +30,10 @@
                     </tr>
                 </table>
             </form>
-            @endif
-            @if(!$errors->isEmpty())
+        </div>
+    @endif
+    @if(!$errors->isEmpty())
+        <div class="col-xs-12 col-md-10 col-md-offset-1">
             <h2>Reported errors:</h2>
             <br>
             <table class="table table-hover table-bordered">
@@ -51,37 +52,26 @@
                 </tr>
                 @endforeach
             </table>
-            @else
-            <h2>No errors reported.</h2>
-            @endif
         </div>
-        <div class="col-xs-12 col-md-5">
-            @if(!$requests->isEmpty())
-                <h2>Current requests:</h2>
-                <br>
-                <table class="table table-hover table-bordered">
-                    
-                        <tr class="active">
-                            <td>Title:</td>
-                            <td>User:</td>
-                            <td>Delete?</td>
-                        </tr>
-                        @foreach ($requests as $request)
-                            <tr>
-                                <td><a href="http://imdb.com/title/{{ $request['imdbid'] }}" target="new">{{ $request->title }}</a></td>
-                                <td>{{ $request->user }}</td>
-                                <td class="text-center"><a href="{{ route('deleterequest', $request->id) }}"><button>x</button></a></td>
-                            </tr>
-                        @endforeach
-                    
-                </table>
-            @else
-                <h2>No requests submitted.</h2>
-            @endif
-        </div>
-    @else
-        <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
-            <h2>You shouldn't be seeing this, someone messed up.</h2>
+    @endif
+    @if(!$requests->isEmpty())
+        <div class="col-xs-12 col-md-10 col-md-offset-1">
+            <h2>Current requests:</h2>
+            <br>
+            <table class="table table-hover table-bordered">
+                <tr class="active">
+                    <td>Title:</td>
+                    <td>User:</td>
+                    <td>Delete?</td>
+                </tr>
+                @foreach ($requests as $request)
+                    <tr>
+                        <td><a href="http://imdb.com/title/{{ $request['imdbid'] }}" target="new">{{ $request->title }}</a></td>
+                        <td>{{ $request->user }}</td>
+                        <td class="text-center"><a href="{{ route('deleterequest', $request->id) }}"><button>x</button></a></td>
+                    </tr>
+                @endforeach
+            </table>
         </div>
     @endif
 @stop

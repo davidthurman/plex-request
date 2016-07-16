@@ -89,6 +89,10 @@ img.plexlogo {
     color: white;
 }
 
+.activepage {
+    background-color: #ff8a00;
+}
+
 .red {
     color:red;
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use Illuminate\Http\Response;
 use App\serverError;
 use App\PlexRequest;
 use Validator;
@@ -12,7 +11,6 @@ use Auth;
 use Input;
 use App\User;
 use Mail;
-use Carbon\Carbon;
 
 class RequestController extends Controller
 {
@@ -22,27 +20,41 @@ class RequestController extends Controller
         $errors = serverError::all();
         $requests = PlexRequest::all();
         $users = User::all();
-        return view('adminpanel', compact('errors', 'requests', 'users'));
+        $activepage = 'admin';
+
+        return view('adminpanel', [
+            'errors' => $errors,
+            'requests' => $requests,
+            'users' => $users,
+            'activepage' => $activepage
+        ]);
 
     }
-
-
 
     public function userRequests() {
 
         $currentUserID = Auth::user()->id;
 
+        $activepage = 'userrequests';
+
         $requests = PlexRequest::where('userid', '=', $currentUserID)->get();
         
-        return view('userrequests', compact('requests'));
+        return view('userrequests', compact('requests', 'activepage'));
 
     }
 
     public function searchPage() {
-        return view('searchpage');
+
+        $activepage = 'search';
+
+        return view('searchpage', [
+            'activepage' => $activepage
+        ]);
     }
 
     public function searchRequest(Request $request) {
+
+        $activepage = 'search';
 
         $data = $request->all();
 
@@ -60,10 +72,9 @@ class RequestController extends Controller
 
         } else {
 
-            return view('searchresults', compact('json'));
+            return view('searchresults', compact('json', 'activepage'));
 
         }
-
 
     }
 

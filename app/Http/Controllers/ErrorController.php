@@ -12,7 +12,10 @@ use Auth;
 class ErrorController extends Controller
 {
     public function reportError() {
-        return view('reporterror');
+
+        $activepage = 'reporterror';
+
+        return view('reporterror', compact('activepage'));
     }
 
     public function submitError(Request $request, Response $response) {

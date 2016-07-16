@@ -1,5 +1,5 @@
-@extends('partials.master')
-
+@extends('layout.master')
+@section('title')Register @stop
 @section('content')
 <div class="container">
     <div class="row">
