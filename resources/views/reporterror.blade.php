@@ -19,7 +19,7 @@
                                 <textarea class="form-control" id="message" name="description" maxlength="500" rows="7"></textarea>
                                 <span class="help-block"><p id="characterLeft" class="help-block ">You have reached the limit</p></span>
                             </div>
-                            <button type="submit" id="submit" name="btnSubmit" class="btn btn-primary pull-right">Submit Form</button>
+                            <button type="submit" id="submit" name="btnSubmit" class="btn btn-plex pull-right">Submit Form</button>
                         </form>
                     </div>
                 </div>

@@ -10,7 +10,7 @@
         <div class="form-group">
             <input type="text" class="form-control" id="title" name="title" placeholder="Title" autofocus required>
         </div>
-        <button type="submit" id="submit" class="btn btn-primary">Search</button>
+        <button type="submit" id="submit" class="btn btn-plex">Search</button>
     </form>
 </div>
 <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">

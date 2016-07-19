@@ -1,32 +1,40 @@
+/*
+* === Site wide ===
+*/
+
 body {
     font-family: 'Open Sans', sans-serif;
     margin-top: 150px;
     color: black;
 }
 
+/*#flashMessage {*/
+    /*padding-left: 15px;*/
+/*}*/
+
 .noDisplay {
     display: none;
 }
 
-.btn-primary {
+.btn-plex {
     color: black;
     background-color: #ff8a00;
     border-color: #ff8a00;
 }
 
-.btn-primary:hover {
+.btn-plex:hover {
     color: black;
     background-color: #ff8a00;
     border: 1px solid black;
 }
 
-.btn-primary:active {
+.btn-plex:active {
     color: black;
     background-color: #ff8a00;
     border: 1px solid black;
 }
 
-.btn-primary:visited {
+.btn-plex:visited {
     color: black;
     background-color: #ff8a00;
     border: 1px solid black;
@@ -59,14 +67,30 @@ a:hover {
     text-decoration: underline;
 }
 
+.red {
+    color:red;
+}
+
+.form-area {
+    padding: 10px 40px 60px;
+}
+
+.form-control:focus {
+    border-color: #ff8a00;
+    box-shadow: inset 0 1px 1px rgba(255,138,0), 0 0 8px rgba(255,138,0);
+}
+
+/*
+* === Navbar ===
+*/
+
+.activepage a {
+    color: #ff8a00!important;
+}
+
 .navbar {
     background-color: #323232;
     color: white;
-    font-size: 18px;
-}
-
-img.plexlogo {
-    padding: 15px;
 }
 
 .navbar-brand {
@@ -81,12 +105,11 @@ img.plexlogo {
 .navbar-default .navbar-nav>li>a {
     color: white;
     size:18px;
-    line-height: 60px;
     padding-right: 20px;
 }
 
 .navbar-default .navbar-nav>li>a:hover {
-    color: white;
+    color: white!important;
     background-color: #ff8a00;
 }
 
@@ -94,27 +117,9 @@ img.plexlogo {
     color: white;
 }
 
-.activepage {
-    background-color: #ff8a00;
-}
-
-.red {
-    color:red;
-}
-
-.form-area {
-    padding: 10px 40px 60px;
-}
-
-.form-control:focus {
-    border-color: #ff8a00;
-    box-shadow: inset 0 1px 1px rgba(255,138,0), 0 0 8px rgba(255,138,0);
-}
-
-#flashMessage {
-    padding-left: 15px;
-}
-
+/*
+* === Responsive CSS ===
+*/
 
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 1200px) {
@@ -123,10 +128,6 @@ img.plexlogo {
 
 /* Medium Devices, Desktops */
 @media only screen and (max-width : 992px) {
-
-    #navbarwelcome {
-        display: none;
-    }
 
 }
 

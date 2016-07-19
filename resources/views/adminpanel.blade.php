@@ -26,7 +26,7 @@
                     <tr>
                         <td></td>
                         <td></td>
-                        <td><button class="btn btn-info">Submit</button></td>
+                        <td><button class="btn btn-plex">Submit</button></td>
                     </tr>
                 </table>
             </form>

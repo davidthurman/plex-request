@@ -8,16 +8,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/">
-                    <img class="plexlogo" src="{{ asset('/images/plexlogo.png') }}">
-                </a>
-                @if(Auth::check())
-                    <span id="navbarwelcome">Welcome, {{ Auth::user()->name }}!</span>
-                @endif
+                <ul class="nav navbar-nav pull-left">
+                    <li class="navbar-welcome"><a href="/">Hello {{ Auth::user()->name }}!</a></li>
+                </ul>
             </div>
             <div class="collapse navbar-collapse" id="plexnavbar">
                 <ul class="nav navbar-nav pull-right">
-                    @if (Auth::user()->isAdmin())
+                    @if(Auth::user()->isAdmin())
                         <li @if($activepage == 'admin')class="activepage"@endif><a href="/admin">Admin</a></li>
                     @endif
                     <li @if($activepage == 'search')class="activepage"@endif><a href="/search">Search</a></li>
@@ -38,9 +35,6 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/search">
-                    <img class="plexlogo" src="{{ asset('/images/plexlogo.png') }}">
-                </a>
             </div>
             <div class="collapse navbar-collapse" id="plexnavbar">
                 <ul class="nav navbar-nav pull-right">
