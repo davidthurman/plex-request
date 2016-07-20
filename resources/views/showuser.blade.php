@@ -16,7 +16,7 @@
             <tr>
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->email }}</td>
-                <td>{{ $user->created_at }}</td>
+                <td>{{ date('M d, Y', strtotime($user->created_at)) }}</td>
                 <td><a href="{{ route('destroyuser', $user->id) }}">Confirm</a></td>
             </tr>
         </table>

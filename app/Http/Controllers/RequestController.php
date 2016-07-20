@@ -66,9 +66,11 @@ class RequestController extends Controller
 
         $key = env('TMDB_KEY');
 
-        $url = "http://api.themoviedb.org/3/search/".$type."?api_key=".$key."&query=".$title;
+        $url = "http://api.themoviedb.org/3/search/".$type."?api_key=".$key."&query=".$title."&include_adult=false&language=en";
 
         $json = json_decode(file_get_contents($url), true);
+
+        //return $json;
 
         if (array_key_exists('total_results', $json) && $json['total_results'] == 0) {
 

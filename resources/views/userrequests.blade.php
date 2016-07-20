@@ -16,7 +16,7 @@
                     @elseif($request->media_type == 'tv')
                         <td><a href="https://www.themoviedb.org/tv/{{ $request['tmdbid'] }}" target="new">{{ $request->title }}</a></td>
                     @endif
-                    <td>{{ $request['created_at']}}</td>
+                    <td>{{ date('M d, Y', strtotime($request['created_at'])) }}</td>
                 </tr>
             @endforeach
         </table>

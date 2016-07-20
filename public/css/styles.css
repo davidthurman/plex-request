@@ -117,6 +117,9 @@ a:hover {
     color: white;
 }
 
+.searchrequestsubmit {
+    color: white!important;
+}
 /*
 * === Responsive CSS ===
 */

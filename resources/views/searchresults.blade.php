@@ -20,34 +20,54 @@
     </form>
 </div>
 <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
-    <h2>Search results:</h2>
-    <br>
     <table class="table table-bordered table-hover">
         @if($type == 'movie')
-            <tr class="active">
-                <td>Release:</td>
-                <td>Title:</td>
-                <td>Submit:</td>
-            </tr>
             @foreach($json['results'] as $movie)
-                <tr>
-                    <td>{{ $movie['release_date'] }}</td>
-                    <td><a href="https://www.themoviedb.org/movie/{{ $movie['id'] }}" target="_blank">{{ $movie['title'] }}</a></td>
-                    <td class="text-center"><a href="{{ route('submitrequest', ['tmdbid' => $movie['id'], 'type' => $type]) }}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></td>
-                </tr>
+                @if($movie['poster_path'] != null && $movie['overview'] != null)
+                <div class="panel panel-default resultbox">
+                    <div class="panel-heading">
+                        <a class="searchrequestsubmit" href="{{ route('submitrequest', ['tmdbid' => $movie['id'], 'type' => $type]) }}">Submit Request for {{ $movie['title'] }}  <i class="fa fa-thumbs-up"></i></a>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img src="http://image.tmdb.org/t/p/w185/{{ $movie['poster_path'] }}">
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                            <div class="col-md-8">
+                                <a href="https://www.themoviedb.org/movie/{{ $movie['id'] }}" target="_blank"><h3>{{ $movie['title'] . " (" . date('Y', strtotime($movie['release_date'])) . ")"}}</h3></a><br>
+                                <span class="resultsummary">{{ str_limit($movie['overview'], 300) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @else
+                @endif
             @endforeach
         @elseif($type == 'tv')
-            <tr class="active">
-                <td>First aired:</td>
-                <td>Title:</td>
-                <td>Submit:</td>
-            </tr>
             @foreach($json['results'] as $tvshow)
-                <tr>
-                    <td>{{ $tvshow['first_air_date'] }}</td>
-                    <td><a href="https://www.themoviedb.org/tv/{{ $tvshow['id'] }}" target="_blank">{{ $tvshow['original_name'] }}</a></td>
-                    <td class="text-center"><a href="{{ route('submitrequest', ['tmdbid' => $tvshow['id'], 'type' => $type]) }}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></td>
-                </tr>
+                @if($tvshow['poster_path'] != null && $tvshow['overview'] != null)
+                    <div class="panel panel-default resultbox">
+                        <div class="panel-heading">
+                            <a class="searchrequestsubmit" href="{{ route('submitrequest', ['tmdbid' => $tvshow['id'], 'type' => $type]) }}">Submit Request for {{ $tvshow['original_name'] }}  <i class="fa fa-thumbs-up"></i></a>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img src="http://image.tmdb.org/t/p/w185/{{ $tvshow['poster_path'] }}">
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-8">
+                                    <a href="https://www.themoviedb.org/movie/{{ $tvshow['id'] }}" target="_blank"><h3>{{ $tvshow['name'] . " - " . date('Y', strtotime($tvshow['first_air_date'])) }}</h3></a><br>
+                                    <span class="resultsummary">{{ str_limit($tvshow['overview'], 300) }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                @endif
             @endforeach
         @endif
     </table>
