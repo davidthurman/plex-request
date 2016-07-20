@@ -1,3 +1,5 @@
+![Plex Request Screenshot](screencap.png)
+
 #plex-request
 
 A web app for people to submit requests for content to be added to a Plex server. Uses OMDB's API currently, but switching to TMDB for better movie poster support. 
@@ -11,7 +13,7 @@ A web app for people to submit requests for content to be added to a Plex server
 
 - Clone the repo.
 - Run 'composer install' to add the needed dependencies.
-- Rename .env.example to .env and enter the values for the database. If you're using the provided Vagrant box, the database is named scotchbox, and user/pass are both root. 
+- Create another copy of .env.example and name it .env.
 - You will need to enter a passphrase in your .env file for user registration.
 - 'php artisan key:generate' to create your application's key and insert it automatically into your .env file. 
 - cd into the project dir on your local machine, run 'vagrant up', and let the box provision. 
