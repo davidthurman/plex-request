@@ -66,7 +66,11 @@
                 </tr>
                 @foreach ($requests as $request)
                     <tr>
-                        <td><a href="http://imdb.com/title/{{ $request['imdbid'] }}" target="new">{{ $request->title }}</a></td>
+                        @if($request->media_type == 'movie')
+                            <td><a href="https://www.themoviedb.org/movie/{{ $request['tmdbid'] }}" target="new">{{ $request->title }}</a></td>
+                        @elseif($request->media_type == 'tv')
+                            <td><a href="https://www.themoviedb.org/tv/{{ $request['tmdbid'] }}" target="new">{{ $request->title }}</a></td>
+                        @endif
                         <td>{{ $request->user }}</td>
                         <td class="text-center"><a href="{{ route('deleterequest', $request->id) }}"><button>x</button></a></td>
                     </tr>

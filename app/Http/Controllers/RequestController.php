@@ -92,7 +92,8 @@ class RequestController extends Controller
 
         $json = json_decode(file_get_contents($url), true);
 
-        $request = PlexRequest::where('tmdbid', '=', $tmdbid)->first();
+        $request = PlexRequest::where('tmdbid', '=', $tmdbid)
+            ->where('media_type', '=', $type)->first();
 
         if($request == null) {
 

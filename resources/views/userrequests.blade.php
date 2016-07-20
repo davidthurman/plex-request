@@ -11,7 +11,11 @@
             </tr>
             @foreach($requests as $request)
                 <tr>
-                    <td><a href="https://www.themoviedb.org/movie/{{ $request['tmdbid'] }}" target="new">{{ $request->title }}</a></td>
+                    @if($request->media_type == 'movie')
+                        <td><a href="https://www.themoviedb.org/movie/{{ $request['tmdbid'] }}" target="new">{{ $request->title }}</a></td>
+                    @elseif($request->media_type == 'tv')
+                        <td><a href="https://www.themoviedb.org/tv/{{ $request['tmdbid'] }}" target="new">{{ $request->title }}</a></td>
+                    @endif
                     <td>{{ $request['created_at']}}</td>
                 </tr>
             @endforeach

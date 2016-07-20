@@ -7,8 +7,13 @@
         {{ csrf_field() }}
         <h2>Search again:</h2>
         <select name="mediatype" class="form-control">
-            <option value="movie">Movie</option>
-            <option value="tv">TV Show</option>
+            @if($type == 'movie')
+                <option value="movie" selected>Movie</option>
+                <option value="tv">TV Show</option>
+            @elseif($type == 'tv')
+                <option value="movie">Movie</option>
+                <option value="tv" selected>TV Show</option>
+            @endif
         </select>
         <input type="text" class="form-control" id="title" name="title" placeholder="Title" required>
         <button type="submit" id="submit" class="btn btn-plex">Search</button>
@@ -27,7 +32,7 @@
             @foreach($json['results'] as $movie)
                 <tr>
                     <td>{{ $movie['release_date'] }}</td>
-                    <td><a href="https://www.themoviedb.org/movie/{{ $movie['id'] }}">{{ $movie['title'] }}</a></td>
+                    <td><a href="https://www.themoviedb.org/movie/{{ $movie['id'] }}" target="_blank">{{ $movie['title'] }}</a></td>
                     <td class="text-center"><a href="{{ route('submitrequest', ['tmdbid' => $movie['id'], 'type' => $type]) }}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></td>
                 </tr>
             @endforeach
@@ -40,7 +45,7 @@
             @foreach($json['results'] as $tvshow)
                 <tr>
                     <td>{{ $tvshow['first_air_date'] }}</td>
-                    <td><a href="https://www.themoviedb.org/tv/{{ $tvshow['id'] }}">{{ $tvshow['original_name'] }}</a></td>
+                    <td><a href="https://www.themoviedb.org/tv/{{ $tvshow['id'] }}" target="_blank">{{ $tvshow['original_name'] }}</a></td>
                     <td class="text-center"><a href="{{ route('submitrequest', ['tmdbid' => $tvshow['id'], 'type' => $type]) }}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></td>
                 </tr>
             @endforeach
