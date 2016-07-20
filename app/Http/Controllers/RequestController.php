@@ -60,43 +60,56 @@ class RequestController extends Controller
 
         $title = $data['title'];
 
+        $type = $data['mediatype'];
+
         $title = rawurlencode($title);
 
-        $url = "http://www.omdbapi.com/?s=" . $title . "&r=json";
+        $key = env('TMDB_KEY');
+
+        $url = "http://api.themoviedb.org/3/search/".$type."?api_key=".$key."&query=".$title;
 
         $json = json_decode(file_get_contents($url), true);
 
-        if(array_key_exists('Error', $json)) {
+        if (array_key_exists('total_results', $json) && $json['total_results'] == 0) {
 
-            return redirect()->route('search')->with(\Session::flash('failure', 'Your search returned no results.'));
+            return redirect()->route('search')->with(\Session::flash('failure', 'No results matched your query.'));
 
         } else {
 
-            return view('searchresults', compact('json', 'activepage'));
+            return view('searchresults', compact('json', 'activepage', 'type'));
 
         }
 
     }
 
-    public function submit($imdbID) {
+    public function submit($tmdbid, $type) {
 
-        $this->imdbID = filter_var($imdbID, FILTER_SANITIZE_STRING);
+        $this->tmdbid = filter_var($tmdbid, FILTER_SANITIZE_STRING);
 
-        $url = "http://www.omdbapi.com/?i=" . $imdbID . "&r=json";
+        $key = env('TMDB_KEY');
 
-        $omdbJson = json_decode(file_get_contents($url), true);
+        $url = "http://api.themoviedb.org/3/".$type."/".$tmdbid."?api_key=".$key;
 
-        $request = PlexRequest::where('imdbid', '=', $imdbID)->first();
+        $json = json_decode(file_get_contents($url), true);
+
+        $request = PlexRequest::where('tmdbid', '=', $tmdbid)->first();
 
         if($request == null) {
 
             $newRequest = New PlexRequest;
 
-            $newRequest->year = $omdbJson['Year'];
-            $newRequest->title = $omdbJson['Title'];
+            if($type == 'tv') {
+                $newRequest->year = $json['first_air_date'];
+                $newRequest->title = $json['original_name'];
+                $newRequest->media_type = 'tv';
+            } elseif($type == 'movie') {
+                $newRequest->year = $json['release_date'];
+                $newRequest->title = $json['original_title'];
+                $newRequest->media_type = 'movie';
+            }
             $newRequest->userid = Auth::user()->id;
             $newRequest->user = Auth::user()->name;
-            $newRequest->imdbid = $imdbID;
+            $newRequest->tmdbid = $tmdbid;
             if($newRequest->save()) {
 
                 $to = env('ADMIN_EMAIL');

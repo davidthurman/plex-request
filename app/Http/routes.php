@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'RequestController@userRequests'
     ]);
 
-    Route::get('/submitrequest/{imdbID}', [
+    Route::get('/submitrequest/{tmdbid}/{type}', [
         'as' => 'submitrequest',
         'uses' => 'RequestController@submit'
     ]);

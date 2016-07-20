@@ -6,9 +6,11 @@
         {{ csrf_field() }}
         <h2>Create new request:</h2>
         <br>
-        <div class="form-group">
-            <input type="text" class="form-control" id="title" name="title" placeholder="Title" autofocus required>
-        </div>
+        <select name="mediatype" class="form-control">
+            <option value="movie">Movie</option>
+            <option value="tv">TV Show</option>
+        </select>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Title" required>
         <button type="submit" id="submit" class="btn btn-plex">Search</button>
     </form>
 </div>

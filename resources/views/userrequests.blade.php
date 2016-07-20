@@ -11,7 +11,7 @@
             </tr>
             @foreach($requests as $request)
                 <tr>
-                    <td><a href="http://imdb.com/title/{{ $request['imdbid'] }}" target="new">{{ $request->title }}</a></td>
+                    <td><a href="https://www.themoviedb.org/movie/{{ $request['tmdbid'] }}" target="new">{{ $request->title }}</a></td>
                     <td>{{ $request['created_at']}}</td>
                 </tr>
             @endforeach
