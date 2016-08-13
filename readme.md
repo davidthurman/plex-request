@@ -19,3 +19,8 @@ A web app for people to submit requests for content to be added to a Plex server
 - cd into the project dir on your local machine, run 'vagrant up', and let the box provision. 
 - Once the box is up and running, 'vagrant ssh' into the box, 'cd /var/www' and run 'php artisan migrate' to create the necessary tables.
 - Access the app in your browser at http://192.168.33.10/ or update your hosts file and map your desired hostname to the IP previously mentioned. 
+
+###To do:
+
+- Continue working on fulfillment system.
+- Save poster images locally for submitted requests. Display these on user requests page.

@@ -8,7 +8,7 @@ use App\serverError;
 use App\PlexRequest;
 use Validator;
 use Auth;
-use Input;
+use Illuminate\Support\Facades\Input;
 use App\User;
 use Mail;
 
@@ -70,15 +70,25 @@ class RequestController extends Controller
 
         $json = json_decode(file_get_contents($url), true);
 
-        //return $json;
+        $query = Input::get('title');
 
         if (array_key_exists('total_results', $json) && $json['total_results'] == 0) {
 
-            return redirect()->route('search')->with(\Session::flash('failure', 'No results matched your query.'));
+            return view('searchresults', [
+                'json' => $json,
+                'activepage' => $activepage,
+                'type' => $type,
+                'query' => $query
+            ])->with(\Session::flash('failure', 'No results matched your query.'));
 
         } else {
 
-            return view('searchresults', compact('json', 'activepage', 'type'));
+            return view('searchresults', [
+                'json' => $json,
+                'activepage' => $activepage,
+                'type' => $type,
+                'query' => $query
+            ]);
 
         }
 
@@ -113,6 +123,7 @@ class RequestController extends Controller
             $newRequest->userid = Auth::user()->id;
             $newRequest->user = Auth::user()->name;
             $newRequest->tmdbid = $tmdbid;
+            $newRequest->fulfilled = 0;
             if($newRequest->save()) {
 
                 $to = env('ADMIN_EMAIL');

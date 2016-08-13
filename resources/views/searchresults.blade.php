@@ -15,7 +15,7 @@
                 <option value="tv" selected>TV Show</option>
             @endif
         </select>
-        <input type="text" class="form-control" id="title" name="title" placeholder="Title" required>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Title" @if(isset($query))value="{{ $query }}" @endif required>
         <button type="submit" id="submit" class="btn btn-plex">Search</button>
     </form>
 </div>
@@ -25,19 +25,30 @@
             @foreach($json['results'] as $movie)
                 @if($movie['poster_path'] != null && $movie['overview'] != null)
                 <div class="panel panel-default resultbox">
-                    <div class="panel-heading">
-                        <a class="searchrequestsubmit" href="{{ route('submitrequest', ['tmdbid' => $movie['id'], 'type' => $type]) }}">Submit Request for {{ $movie['title'] }}  <i class="fa fa-thumbs-up"></i></a>
-                    </div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-3">
-                                <img src="http://image.tmdb.org/t/p/w185/{{ $movie['poster_path'] }}">
+                                <a href="https://www.themoviedb.org/movie/{{ $movie['id'] }}" target="_blank">
+                                    <img src="http://image.tmdb.org/t/p/w185/{{ $movie['poster_path'] }}">
+                                </a>
                             </div>
                             <div class="col-md-1">
                             </div>
                             <div class="col-md-8">
                                 <a href="https://www.themoviedb.org/movie/{{ $movie['id'] }}" target="_blank"><h3>{{ $movie['title'] . " (" . date('Y', strtotime($movie['release_date'])) . ")"}}</h3></a><br>
                                 <span class="resultsummary">{{ str_limit($movie['overview'], 300) }}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                            </div>
+                            <div class="col-xs-8">
+                                <a href="https://www.themoviedb.org/movie/{{ $movie['id'] }}" target="_blank">
+                                    <button class="btn btn-default">More...</button>
+                                </a>
+                                <a class="searchrequestsubmit" href="{{ route('submitrequest', ['tmdbid' => $movie['id'], 'type' => $type]) }}">
+                                    <button class="btn btn-plex">Submit</button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -49,19 +60,33 @@
             @foreach($json['results'] as $tvshow)
                 @if($tvshow['poster_path'] != null && $tvshow['overview'] != null)
                     <div class="panel panel-default resultbox">
-                        <div class="panel-heading">
-                            <a class="searchrequestsubmit" href="{{ route('submitrequest', ['tmdbid' => $tvshow['id'], 'type' => $type]) }}">Submit Request for {{ $tvshow['original_name'] }}  <i class="fa fa-thumbs-up"></i></a>
-                        </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <img src="http://image.tmdb.org/t/p/w185/{{ $tvshow['poster_path'] }}">
+                                    <a href="https://www.themoviedb.org/tv/{{ $tvshow['id'] }}" target="_blank">
+                                        <img src="http://image.tmdb.org/t/p/w185/{{ $tvshow['poster_path'] }}">
+                                    </a>
                                 </div>
                                 <div class="col-md-1">
                                 </div>
                                 <div class="col-md-8">
-                                    <a href="https://www.themoviedb.org/movie/{{ $tvshow['id'] }}" target="_blank"><h3>{{ $tvshow['name'] . " - " . date('Y', strtotime($tvshow['first_air_date'])) }}</h3></a><br>
+                                    <a href="https://www.themoviedb.org/tv/{{ $tvshow['id'] }}" target="_blank">
+                                        <h3>{{ $tvshow['name'] . " - " . date('Y', strtotime($tvshow['first_air_date'])) }}</h3>
+                                    </a>
+                                    <br>
                                     <span class="resultsummary">{{ str_limit($tvshow['overview'], 300) }}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                </div>
+                                <div class="col-xs-8">
+                                    <a href="https://www.themoviedb.org/tv/{{ $tvshow['id'] }}" target="_blank">
+                                        <button class="btn btn-default">More...</button>
+                                    </a>
+                                    <a class="searchrequestsubmit" href="{{ route('submitrequest', ['tmdbid' => $tvshow['id'], 'type' => $type]) }}">
+                                        <button class="btn btn-plex">Submit</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

@@ -8,9 +8,9 @@ body {
     color: black;
 }
 
-/*#flashMessage {*/
-    /*padding-left: 15px;*/
-/*}*/
+.buttons {
+    margin-top: 25px !important;
+}
 
 .noDisplay {
     display: none;
