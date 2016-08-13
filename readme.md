@@ -22,5 +22,5 @@ A web app for people to submit requests for content to be added to a Plex server
 
 ###To do:
 
-- Continue working on fulfillment system.
-- Make admin panel more fully featured.
+- Continue working on fulfillment system w/ messages from admins.
+- Checkboxes for request status on admin panel. Also sort by status with tabs. 

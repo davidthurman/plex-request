@@ -23,8 +23,8 @@
                             @endif
                             <br><br>
                             <strong>Date requested:</strong> {{ date('M d, Y', strtotime($request['created_at'])) }}
-                            @if(isset($activetab) && $activetab == 'filled')<br><strong>Date filled:</strong>@endif
-                            @if(isset($activetab) && $activetab == 'declined')<br><strong>Date declined:</strong>@endif
+                            @if(isset($activetab) && $activetab == 'filled')<br><strong>Date filled:</strong> {{ date('M d, Y', strtotime($request->updated_at)) }}@endif
+                            @if(isset($activetab) && $activetab == 'declined')<br><strong>Date declined:</strong> {{ date('M d, Y', strtotime($request->updated_at)) }}@endif
                         </div>
                     </div>
                 </div>

@@ -194,7 +194,6 @@ class RequestController extends Controller
     public function fill($id) {
         $request = PlexRequest::findOrFail($id);
         $request->status = 1;
-        $request->updated_at = date();
         $request->save();
         if ($request->status == 1) {
             return redirect()->back()->with(\Session::flash('success', 'Request has been marked as filled.'));
@@ -206,7 +205,6 @@ class RequestController extends Controller
     public function decline($id) {
         $request = PlexRequest::findOrFail($id);
         $request->status = 2;
-        $request->updated_at = date();
         $request->save();
         if ($request->status == 2) {
             return redirect()->back()->with(\Session::flash('success', 'Request has been marked as declined.'));
