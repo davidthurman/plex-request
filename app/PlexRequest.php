@@ -15,10 +15,10 @@ class PlexRequest extends Model
             return false;
         } else {
             if ($type == 'movie') {
-                $poster_path = '/storage/public/posters/movie/' . $imdbid . '.jpg';
+                $poster_path = '/storage/posters/movie/' . $imdbid . '.jpg';
                 return $poster_path;
             } elseif ($type == 'tv') {
-                $poster_path = '/storage/public/posters/tv/' . $imdbid . '.jpg';
+                $poster_path = '/storage/posters/tv/' . $imdbid . '.jpg';
                 return $poster_path;
             }
         }
