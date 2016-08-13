@@ -124,17 +124,17 @@ class RequestController extends Controller
             $newRequest->userid = Auth::user()->id;
             $newRequest->user = Auth::user()->name;
             $newRequest->tmdbid = $tmdbid;
-            $newRequest->fulfilled = 0;
+            $newRequest->status = 0;
 
             //grab the movie poster and save it locally
             $poster = 'http://image.tmdb.org/t/p/w185/'.$json['poster_path'];
             $temp_image = file_get_contents($poster);
             if($type == 'movie') {
-                Storage::disk('local')->put('/posters/movies/' . $tmdbid . '.jpg', $temp_image, 'public');
-                $newRequest->poster_path = '/posters/movies/'.$tmdbid.'.jpg';
+                Storage::disk('public')->put('/posters/movie/' . $tmdbid . '.jpg', $temp_image);
+                $newRequest->poster_path = '/posters/movie/'.$tmdbid.'.jpg';
             }
             elseif($type == 'tv') {
-                Storage::disk('local')->put('/posters/tv/' . $tmdbid . '.jpg', $temp_image, 'public');
+                Storage::disk('public')->put('/posters/tv/' . $tmdbid . '.jpg', $temp_image);
                 $newRequest->poster_path = '/posters/tv/'.$tmdbid.'.jpg';
             }
 
