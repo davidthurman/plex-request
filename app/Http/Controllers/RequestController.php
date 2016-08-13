@@ -130,12 +130,14 @@ class RequestController extends Controller
             $poster = 'http://image.tmdb.org/t/p/w185/'.$json['poster_path'];
             $temp_image = file_get_contents($poster);
             if($type == 'movie') {
-                Storage::disk('local')->put('/posters/movies/' . $tmdbid . '.jpg', $temp_image);
+                Storage::disk('local')->put('/posters/movies/' . $tmdbid . '.jpg', $temp_image, 'public');
+                $newRequest->poster_path = '/posters/movies/'.$tmdbid.'.jpg';
             }
             elseif($type == 'tv') {
-                Storage::disk('local')->put('/posters/tv/' . $tmdbid . '.jpg', $temp_image);
+                Storage::disk('local')->put('/posters/tv/' . $tmdbid . '.jpg', $temp_image, 'public');
+                $newRequest->poster_path = '/posters/tv/'.$tmdbid.'.jpg';
             }
-            
+
             if($newRequest->save()) {
 
                 $to = env('ADMIN_EMAIL');
