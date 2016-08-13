@@ -32,15 +32,45 @@ class RequestController extends Controller
 
     }
 
-    public function userRequests() {
+    public function showPendingRequests() {
 
         $currentUserID = Auth::user()->id;
 
         $activepage = 'userrequests';
+        $activetab = 'pending';
 
-        $requests = PlexRequest::where('userid', '=', $currentUserID)->get();
+        $requests = PlexRequest::where('userid', '=', $currentUserID)
+            ->where('status', '=', 0)->get();
         
-        return view('userrequests', compact('requests', 'activepage'));
+        return view('userrequests', compact('requests', 'activepage', 'activetab'));
+
+    }
+
+    public function showFilledRequests() {
+
+        $currentUserID = Auth::user()->id;
+
+        $activepage = 'userrequests';
+        $activetab = 'filled';
+
+        $requests = PlexRequest::where('userid', '=', $currentUserID)
+            ->where('status', '=', 1)->get();
+
+        return view('userrequests', compact('requests', 'activepage', 'activetab'));
+
+    }
+
+    public function showDeclinedRequests() {
+
+        $currentUserID = Auth::user()->id;
+
+        $activepage = 'userrequests';
+        $activetab = 'declined';
+
+        $requests = PlexRequest::where('userid', '=', $currentUserID)
+            ->where('status', '=', 2)->get();
+
+        return view('userrequests', compact('requests', 'activepage', 'activetab'));
 
     }
 
@@ -149,9 +179,9 @@ class RequestController extends Controller
 
                 mail($to, $subject, $message, $headers);
 
-                return redirect()->route('userrequests')->with(\Session::flash('success', 'Your request was received.'));
+                return redirect()->route('pendingrequests')->with(\Session::flash('success', 'Your request was received.'));
             } else {
-                return redirect()->route('userrequests')->with(\Session::flash('failure', 'There was a problem. Your request was not submitted.'));
+                return redirect()->route('pendingrequests')->with(\Session::flash('failure', 'There was a problem. Your request was not submitted.'));
             }
 
         } else {

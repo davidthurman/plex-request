@@ -18,7 +18,7 @@
                         <li @if($activepage == 'admin')class="activepage"@endif><a href="/admin">Admin</a></li>
                     @endif
                     <li @if($activepage == 'search')class="activepage"@endif><a href="/search">Search</a></li>
-                    <li @if($activepage == 'userrequests')class="activepage"@endif><a href="/userrequests">Requests</a></li>
+                    <li @if($activepage == 'userrequests')class="activepage"@endif><a href="/pendingrequests">Requests</a></li>
                     <li @if($activepage == 'reporterror')class="activepage"@endif><a href="/reporterror">Report error</a></li>
                     <li><a href="/logout">Log out</a></li>
                 </ul>

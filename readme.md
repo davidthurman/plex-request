@@ -23,4 +23,4 @@ A web app for people to submit requests for content to be added to a Plex server
 ###To do:
 
 - Continue working on fulfillment system.
-- Save poster images locally for submitted requests. Display these on user requests page.
+- Make admin panel more fully featured.
