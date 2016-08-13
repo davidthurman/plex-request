@@ -11,6 +11,7 @@ use Auth;
 use Illuminate\Support\Facades\Input;
 use App\User;
 use Mail;
+use Illuminate\Support\Facades\Storage;
 
 class RequestController extends Controller
 {
@@ -124,13 +125,24 @@ class RequestController extends Controller
             $newRequest->user = Auth::user()->name;
             $newRequest->tmdbid = $tmdbid;
             $newRequest->fulfilled = 0;
+
+            //grab the movie poster and save it locally
+            $poster = 'http://image.tmdb.org/t/p/w185/'.$json['poster_path'];
+            $temp_image = file_get_contents($poster);
+            if($type == 'movie') {
+                Storage::disk('local')->put('/posters/movies/' . $tmdbid . '.jpg', $temp_image);
+            }
+            elseif($type == 'tv') {
+                Storage::disk('local')->put('/posters/tv/' . $tmdbid . '.jpg', $temp_image);
+            }
+            
             if($newRequest->save()) {
 
                 $to = env('ADMIN_EMAIL');
                 $subject = 'New Plex Request';
                 $message = 'You\'ve received a new request for ' . $newRequest->title . '.';
-                $headers = 'From: admin@plexrequest.net' . "\r\n" .
-                    'Reply-To: admin@plexrequest.net' . "\r\n" .
+                $headers = 'From: ' . 'admin@'.env('APP_URL') . "\r\n" .
+                    'Reply-To: ' . 'admin@'.env('APP_URL') . "\r\n" .
                     'X-Mailer: PHP/' . phpversion();
 
                 mail($to, $subject, $message, $headers);

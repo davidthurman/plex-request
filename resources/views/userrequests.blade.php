@@ -4,22 +4,16 @@
 @if(!$requests->isEmpty())
     <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
         <h2>Your unfulfilled requests:</h2>
-        <table class="table table-hover table-bordered">
-            <tr class="active">
-                <td>Title:</td>
-                <td>Requested on:</td>
-            </tr>
             @foreach($requests as $request)
-                <tr>
+                <div class="col-md-4">
                     @if($request->media_type == 'movie')
-                        <td><a href="https://www.themoviedb.org/movie/{{ $request['tmdbid'] }}" target="new">{{ $request->title }}</a></td>
+                        <a href="https://www.themoviedb.org/movie/{{ $request['tmdbid'] }}" target="new"></a>
                     @elseif($request->media_type == 'tv')
-                        <td><a href="https://www.themoviedb.org/tv/{{ $request['tmdbid'] }}" target="new">{{ $request->title }}</a></td>
+                        <a href="https://www.themoviedb.org/tv/{{ $request['tmdbid'] }}" target="new"></a>
                     @endif
-                    <td>{{ date('M d, Y', strtotime($request['created_at'])) }}</td>
-                </tr>
+                    {{ date('M d, Y', strtotime($request['created_at'])) }}
+                </div>
             @endforeach
-        </table>
     </div>
 @else
     <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
