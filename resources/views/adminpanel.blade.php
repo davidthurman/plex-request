@@ -62,7 +62,9 @@
                 <tr class="active">
                     <td>Title:</td>
                     <td>User:</td>
-                    <td>Delete?</td>
+                    <td>Status:</td>
+                    <td>Fill:</td>
+                    <td>Decline:</td>
                 </tr>
                 @foreach ($requests as $request)
                     <tr>
@@ -72,7 +74,14 @@
                             <td><a href="https://www.themoviedb.org/tv/{{ $request['tmdbid'] }}" target="new">{{ $request->title }}</a></td>
                         @endif
                         <td>{{ $request->user }}</td>
-                        <td class="text-center"><a href="{{ route('deleterequest', $request->id) }}"><button>x</button></a></td>
+                        <td>
+                            @if($request->status == 0)Pending
+                            @elseif($request->status == 1)Filled
+                            @elseif($request->status == 2)Declined
+                            @endif
+                        </td>
+                        <td class="text-center"><a href="{{ route('fillrequest', $request->id) }}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></td>
+                        <td class="text-center"><a href="{{ route('declinerequest', $request->id) }}"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a></td>
                     </tr>
                 @endforeach
             </table>

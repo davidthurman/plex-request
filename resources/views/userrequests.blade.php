@@ -33,7 +33,15 @@
     </div>
 @else
     <div class="col-xs-12 col-md-10 col-md-offset-1 text-center">
-        <h2>You haven't submitted any requests yet.</h2>
+        <h2>Your requests:</h2>
+        <br>
+        <ul class="nav nav-tabs">
+            <li @if(isset($activetab) && $activetab == 'pending')class="active"@endif><a href="#" onclick="loadPending()">Pending</a></li>
+            <li @if(isset($activetab) && $activetab == 'filled')class="active"@endif><a href="#" onclick="loadFilled()">Filled</a></li>
+            <li @if(isset($activetab) && $activetab == 'declined')class="active"@endif><a href="#" onclick="loadDeclined()">Declined</a></li>
+        </ul>
+        <br>
+        <h2>You have no requests with that status.</h2>
     </div>
 @endif
 @stop

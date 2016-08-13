@@ -26,9 +26,14 @@ Route::group(['middleware' => 'admin'], function() {
             'uses' => 'UsersController@destroy'
         ]);
 
-        Route::get('/deleterequest/{id}', [
-            'as' => 'deleterequest',
-            'uses' => 'RequestController@destroy'
+        Route::get('/fillrequest/{id}', [
+            'as' => 'fillrequest',
+            'uses' => 'RequestController@fill'
+        ]);
+
+        Route::get('/declinerequest/{id}', [
+            'as' => 'declinerequest',
+            'uses' => 'RequestController@decline'
         ]);
 
         Route::get('/deleteerror/{id}', [

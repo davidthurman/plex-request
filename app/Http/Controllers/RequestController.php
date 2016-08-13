@@ -186,17 +186,32 @@ class RequestController extends Controller
 
         } else {
 
-            return redirect()->route('search')->with(\Session::flash('failure', 'There is already a pending request for that title.'));
+            return redirect()->route('search')->withInput()->with(\Session::flash('failure', 'A request has already been submitted for that title.'));
         }
 
     }
 
-    public function destroy($id) {
+    public function fill($id) {
         $request = PlexRequest::findOrFail($id);
-        if ($request->delete()) {
-            return redirect()->back()->with(\Session::flash('success', 'Request has been deleted.'));
+        $request->status = 1;
+        $request->updated_at = date();
+        $request->save();
+        if ($request->status == 1) {
+            return redirect()->back()->with(\Session::flash('success', 'Request has been marked as filled.'));
         } else {
-            return redirect()->back()->with(\Session::flash('failure', 'There was a problem. The request was not deleted.'));
+            return redirect()->back()->with(\Session::flash('failure', 'There was a problem. The request was not marked filled.'));
+        }
+    }
+
+    public function decline($id) {
+        $request = PlexRequest::findOrFail($id);
+        $request->status = 2;
+        $request->updated_at = date();
+        $request->save();
+        if ($request->status == 2) {
+            return redirect()->back()->with(\Session::flash('success', 'Request has been marked as declined.'));
+        } else {
+            return redirect()->back()->with(\Session::flash('failure', 'There was a problem. The request was not marked declined.'));
         }
     }
 
