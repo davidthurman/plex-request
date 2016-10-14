@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.public')
 @section('title')Search results @stop
 
 @section('content')

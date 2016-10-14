@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.public')
 @section('title')Your requests @stop
 @section('content')
 @if(!$requests->isEmpty())

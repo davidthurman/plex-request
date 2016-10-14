@@ -13,24 +13,8 @@ use App\User;
 use Mail;
 use Illuminate\Support\Facades\Storage;
 
-class RequestController extends Controller
+class RequestController extends BaseController
 {
-
-    public function admin() {
-
-        $errors = serverError::all();
-        $requests = PlexRequest::all();
-        $users = User::all();
-        $activepage = 'admin';
-
-        return view('adminpanel', [
-            'errors' => $errors,
-            'requests' => $requests,
-            'users' => $users,
-            'activepage' => $activepage
-        ]);
-
-    }
 
     public function showPendingRequests() {
 
@@ -191,26 +175,6 @@ class RequestController extends Controller
 
     }
 
-    public function fill($id) {
-        $request = PlexRequest::findOrFail($id);
-        $request->status = 1;
-        $request->save();
-        if ($request->status == 1) {
-            return redirect()->back()->with(\Session::flash('success', 'Request has been marked as filled.'));
-        } else {
-            return redirect()->back()->with(\Session::flash('failure', 'There was a problem. The request was not marked filled.'));
-        }
-    }
 
-    public function decline($id) {
-        $request = PlexRequest::findOrFail($id);
-        $request->status = 2;
-        $request->save();
-        if ($request->status == 2) {
-            return redirect()->back()->with(\Session::flash('success', 'Request has been marked as declined.'));
-        } else {
-            return redirect()->back()->with(\Session::flash('failure', 'There was a problem. The request was not marked declined.'));
-        }
-    }
 
 }

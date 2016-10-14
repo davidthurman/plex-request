@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.public')
 @section('title')Register @stop
 @section('content')
 <div class="container">

@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.public')
 @section('title')View user @stop
 @section('content')
 <div class="col-xs-12 col-md-8 col-md-offset-2">

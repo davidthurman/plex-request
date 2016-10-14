@@ -9,7 +9,7 @@ use App\serverError;
 use Validator;
 use Auth;
 
-class ErrorController extends Controller
+class ErrorController extends BaseController
 {
     public function reportError() {
 
@@ -38,6 +38,7 @@ class ErrorController extends Controller
         $error->name = Auth::user()->name;
         $error->date = $data['date'];
         $error->description = $data['description'];
+        $error->resolved = 0;
 
         $error->save();
 

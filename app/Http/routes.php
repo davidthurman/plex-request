@@ -6,10 +6,56 @@
 
 Route::group(['middleware' => 'admin'], function() {
 
-        Route::get('/admin', [
-            'as' => 'admin',
-            'uses' => 'RequestController@admin'
+    Route::group(['prefix' => '/admin'], function() {
+
+        Route::get('/', [
+            'as' => 'admindashboard',
+            'uses' => 'AdminController@dashboard'
         ]);
+
+        Route::get('/requests/pending', [
+            'as' => 'adminpendingrequests',
+            'uses' => 'AdminController@pendingRequests'
+        ]);
+
+        Route::get('/users', [
+            'as' => 'adminusers',
+            'uses' => 'AdminController@users'
+        ]);
+
+        Route::get('/errors', [
+            'as' => 'adminerrors',
+            'uses' => 'AdminController@errors'
+        ]);
+
+        Route::group(['prefix' => '/requests'], function() {
+
+            Route::get('/pending', [
+                'as' => 'adminpendingrequests',
+                'uses' => 'AdminController@pendingRequests'
+            ]);
+
+            Route::get('/filled', [
+                'as' => 'adminfilledrequests',
+                'uses' => 'AdminController@filledRequests'
+            ]);
+
+            Route::get('/declined', [
+                'as' => 'admindeclinedrequests',
+                'uses' => 'AdminController@declinedRequests'
+            ]);
+
+            Route::get('/fill/{id}', [
+                'as' => 'fillrequest',
+                'uses' => 'AdminController@fill'
+            ]);
+
+            Route::get('/decline/{id}', [
+                'as' => 'declinerequest',
+                'uses' => 'AdminController@decline'
+            ]);
+
+        });
 
         Route::get('/showuser/{id}', [
             'as' => 'showuser',
@@ -26,20 +72,14 @@ Route::group(['middleware' => 'admin'], function() {
             'uses' => 'UsersController@destroy'
         ]);
 
-        Route::get('/fillrequest/{id}', [
-            'as' => 'fillrequest',
-            'uses' => 'RequestController@fill'
-        ]);
 
-        Route::get('/declinerequest/{id}', [
-            'as' => 'declinerequest',
-            'uses' => 'RequestController@decline'
-        ]);
 
         Route::get('/deleteerror/{id}', [
             'as' => 'deleteerror',
             'uses' => 'ErrorController@destroy'
         ]);
+
+    });
 
 });
 

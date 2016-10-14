@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.public')
 @section('title')Page not found! @stop
 @section('content')
     <div class="container">

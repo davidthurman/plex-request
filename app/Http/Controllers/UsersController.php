@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 
-class UsersController extends Controller
+class UsersController extends BaseController
 {
 
     public function edituser(Request $request) {
