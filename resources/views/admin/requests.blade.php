@@ -3,8 +3,13 @@
 @section('content')
     <div class="container">
         <div class="col-xs-12 col-md-10 col-md-offset-1">
+
+            <button onclick="loadPending()" class="btn btn-default @if($path == 'admin/requests/pending' || $path == 'admin/requests')btn-primary @endif">Pending</button>
+            <button onclick="loadFilled()" class="btn btn-default @if($path == 'admin/requests/filled')btn-primary @endif">Filled</button>
+            <button onclick="loadDeclined()" class="btn btn-default @if($path == 'admin/requests/declined')btn-primary @endif">Declined</button>
+
             <h2>
-                @if($path == 'admin/requests/pending')Pending @endif
+                @if($path == 'admin/requests/pending' || $path == 'admin/requests')Pending @endif
                 @if($path == 'admin/requests/filled')Filled @endif
                 @if($path == 'admin/requests/declined')Declined @endif
                 requests:
@@ -51,4 +56,49 @@
             </table>
         </div>
     </div>
+@stop
+
+@section('jsadditions')
+    <script type="text/javascript">
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                document.getElementById("requestsdisplay").innerHTML = xhttp.responseText;
+            }
+        };
+
+        function loadPending() {
+            xhttp.open("GET", "/admin/requests/pending", true);
+            xhttp.send();
+        }
+
+//        function loadFilled() {
+//            xhttp.open("GET", "/admin/requests/filled", true);
+//            xhttp.send();
+//        }
+
+        function loadDeclined() {
+            xhttp.open("GET", "/admin/requests/declined", true);
+            xhttp.send();
+        }
+
+        function loadFilled(e) {
+
+            var url = "/admin/requests/filled";
+
+            $.ajax({
+                type: "get",
+                url: url,
+                success: function (data) {
+                    JSON.parse(data);
+                }
+            });
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+        }
+
+//        });
+
+    </script>
 @stop

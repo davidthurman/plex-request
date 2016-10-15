@@ -12,7 +12,7 @@ class BaseController extends Controller
 
         $path = Route::getCurrentRoute()->getPath();
 
-        // Make path available in all views
+        // Make path available in all views for determining active page.
         View::share('path', $path);
 
     }

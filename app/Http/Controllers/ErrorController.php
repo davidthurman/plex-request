@@ -6,11 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Http\Response;
 use App\serverError;
+use League\Flysystem\Exception;
+use Mockery\Exception\RuntimeException;
 use Validator;
 use Auth;
 
 class ErrorController extends BaseController
 {
+    /**
+     * Display the error form to the user.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function reportError() {
 
         $activepage = 'reporterror';
@@ -18,7 +24,12 @@ class ErrorController extends BaseController
         return view('reporterror', compact('activepage'));
     }
 
-    public function submitError(Request $request, Response $response) {
+    /**
+     * Submit an error with the server for review.
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function submitError(Request $request) {
 
         $data = $request->all();
 
@@ -40,20 +51,31 @@ class ErrorController extends BaseController
         $error->description = $data['description'];
         $error->resolved = 0;
 
-        $error->save();
-
-        return redirect()->back()
-            ->with(\Session::flash('success', 'Error has been submitted and I\'ll look into it.'));
+        if($error->save()) {
+            return redirect()->back()
+                ->with(\Session::flash('success', 'Error has been submitted and I\'ll look into it.'));
+        } else {
+            new RuntimeException("Error failed to submit.");
+            return redirect()->back()
+                ->with(\Session::flash('failure', 'There was a problem. The error was not submitted for review.'));
+        }
     }
 
-    public function destroy($id) {
+    /**
+     * Mark an error as resolved by changing resolved column to 1.
+     * @param int $id - The ID of the error to be marked resolved.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function resolve($id) {
 
         $error = serverError::findOrFail($id);
+        $error->resolved = 1;
+        $error->save();
 
-        if ($error->delete()) {
-            return redirect()->back()->with(\Session::flash('success', 'Error has been deleted.'));
+        if ($error->save()) {
+            return redirect()->back()->with(\Session::flash('success', 'Error has been marked resolved.'));
         } else {
-            return redirect()->back()->with(\Session::flash('failure', 'There was a problem. The error was not deleted.'));
+            return redirect()->back()->with(\Session::flash('failure', 'There was a problem. The error was not marked resolved.'));
         }
     }
 }

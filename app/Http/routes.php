@@ -30,6 +30,11 @@ Route::group(['middleware' => 'admin'], function() {
 
         Route::group(['prefix' => '/requests'], function() {
 
+            Route::get('/', [
+                'as' => 'adminpendingrequests',
+                'uses' => 'AdminController@pendingRequests'
+            ]);
+
             Route::get('/pending', [
                 'as' => 'adminpendingrequests',
                 'uses' => 'AdminController@pendingRequests'
@@ -74,9 +79,9 @@ Route::group(['middleware' => 'admin'], function() {
 
 
 
-        Route::get('/deleteerror/{id}', [
-            'as' => 'deleteerror',
-            'uses' => 'ErrorController@destroy'
+        Route::get('/resolveerror/{id}', [
+            'as' => 'resolveerror',
+            'uses' => 'ErrorController@resolve'
         ]);
 
     });

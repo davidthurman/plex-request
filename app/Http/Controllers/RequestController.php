@@ -67,6 +67,11 @@ class RequestController extends BaseController
         ]);
     }
 
+    /**
+     *
+     * @param Request $request
+     * @return $this|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function searchRequest(Request $request) {
 
         $activepage = 'search';
@@ -109,6 +114,12 @@ class RequestController extends BaseController
 
     }
 
+    /**
+     * Submit a new media request
+     * @param int $tmdbid
+     * @param string $type
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function submit($tmdbid, $type) {
 
         $this->tmdbid = filter_var($tmdbid, FILTER_SANITIZE_STRING);
