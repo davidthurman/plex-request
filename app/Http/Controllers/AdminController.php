@@ -53,20 +53,32 @@ class AdminController extends BaseController
     }
 
     /**
-     * Retrieve requests with a pending status
+     * Retrieve requests with a pending status and display the view
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function pendingRequests() {
+    public function displayRequests() {
         $requests = PlexRequest::where('status', '=', 0)->get();
         return view('admin.requests', [
             'requests' => $requests,
         ]);
     }
 
+    /**
+     * Retrieve requests with a pending status
+     * @return mixed
+     */
+    public function pendingRequests() {
+        $requests = PlexRequest::where('status', '=', 0)->get();
+        return $requests;
+    }
 
+    /**
+     * Retrieve requests with a filled status
+     * @return mixed
+     */
     public function filledRequests() {
         $requests = PlexRequest::where('status', '=', 1)->get();
-        View::make($requests);
+        return $requests;
     }
 
     /**

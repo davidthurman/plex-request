@@ -31,8 +31,8 @@ Route::group(['middleware' => 'admin'], function() {
         Route::group(['prefix' => '/requests'], function() {
 
             Route::get('/', [
-                'as' => 'adminpendingrequests',
-                'uses' => 'AdminController@pendingRequests'
+                'as' => 'admindisplayrequests',
+                'uses' => 'AdminController@displayRequests'
             ]);
 
             Route::get('/pending', [
@@ -145,12 +145,10 @@ Route::group(['middleware' => 'auth'], function() {
  * Public routes
  */
 
- Route::get('register', [
-     'as' => 'register',
-     'uses' => 'Auth\AuthController@getRegister',
- ]);
-
-
+Route::get('register', [
+ 'as' => 'register',
+ 'uses' => 'Auth\AuthController@getRegister',
+]);
 
 Route::get('login', [
     'as' => 'login',
@@ -165,7 +163,6 @@ Route::get('logout', [
 ]);
 
 Route::auth();
-
 
 Route::group(['middleware' => 'registration'], function() {
 
