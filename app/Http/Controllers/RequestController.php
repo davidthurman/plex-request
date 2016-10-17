@@ -16,55 +16,53 @@ use Illuminate\Support\Facades\Storage;
 class RequestController extends BaseController
 {
 
-    public function showPendingRequests() {
+    /**
+     * Display the user requests view
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function displayRequests() {
+        return view('userrequests');
+    }
 
-        $currentUserID = Auth::user()->id;
-
-        $activepage = 'userrequests';
-        $activetab = 'pending';
-
-        $requests = PlexRequest::where('userid', '=', $currentUserID)
+    /**
+     * Fetch the user's pending requests
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function pendingRequests() {
+        $requests = PlexRequest::where('userid', '=', Auth::user()->id)
             ->where('status', '=', 0)->get();
         
-        return view('userrequests', compact('requests', 'activepage', 'activetab'));
-
+        return view('partials.userrequests', compact('requests'));
     }
 
-    public function showFilledRequests() {
-
-        $currentUserID = Auth::user()->id;
-
-        $activepage = 'userrequests';
-        $activetab = 'filled';
-
-        $requests = PlexRequest::where('userid', '=', $currentUserID)
+    /**
+     * Fetch the user's filled requests
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function filledRequests() {
+        $requests = PlexRequest::where('userid', '=', Auth::user()->id)
             ->where('status', '=', 1)->get();
 
-        return view('userrequests', compact('requests', 'activepage', 'activetab'));
-
+        return view('partials.userrequests', compact('requests'));
     }
 
-    public function showDeclinedRequests() {
-
-        $currentUserID = Auth::user()->id;
-
-        $activepage = 'userrequests';
-        $activetab = 'declined';
-
-        $requests = PlexRequest::where('userid', '=', $currentUserID)
+    /**
+     * Fetch the user's declined requests
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function declinedRequests() {
+        $requests = PlexRequest::where('userid', '=', Auth::user()->id)
             ->where('status', '=', 2)->get();
 
-        return view('userrequests', compact('requests', 'activepage', 'activetab'));
-
+        return view('partials.userrequests', compact('requests'));
     }
 
+    /**
+     * Display the view to search/submit new requests
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function searchPage() {
-
-        $activepage = 'search';
-
-        return view('searchpage', [
-            'activepage' => $activepage
-        ]);
+        return view('searchpage');
     }
 
     /**
@@ -74,29 +72,19 @@ class RequestController extends BaseController
      */
     public function searchRequest(Request $request) {
 
-        $activepage = 'search';
-
         $data = $request->all();
-
         $title = $data['title'];
-
         $type = $data['mediatype'];
-
         $title = rawurlencode($title);
-
         $key = env('TMDB_KEY');
-
         $url = "http://api.themoviedb.org/3/search/".$type."?api_key=".$key."&query=".$title."&include_adult=false&language=en";
-
         $json = json_decode(file_get_contents($url), true);
-
         $query = Input::get('title');
 
         if (array_key_exists('total_results', $json) && $json['total_results'] == 0) {
 
             return view('searchresults', [
                 'json' => $json,
-                'activepage' => $activepage,
                 'type' => $type,
                 'query' => $query
             ])->with(\Session::flash('failure', 'No results matched your query.'));
@@ -105,7 +93,6 @@ class RequestController extends BaseController
 
             return view('searchresults', [
                 'json' => $json,
-                'activepage' => $activepage,
                 'type' => $type,
                 'query' => $query
             ]);
@@ -174,9 +161,9 @@ class RequestController extends BaseController
 
                 mail($to, $subject, $message, $headers);
 
-                return redirect()->route('pendingrequests')->with(\Session::flash('success', 'Your request was received.'));
+                return redirect()->route('displayrequests')->with(\Session::flash('success', 'Your request was received.'));
             } else {
-                return redirect()->route('pendingrequests')->with(\Session::flash('failure', 'There was a problem. Your request was not submitted.'));
+                return redirect()->route('displayrequests')->with(\Session::flash('failure', 'There was a problem. Your request was not submitted.'));
             }
 
         } else {
@@ -185,7 +172,5 @@ class RequestController extends BaseController
         }
 
     }
-
-
 
 }

@@ -109,19 +109,24 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'RequestController@searchRequest'
     ]);
 
+    Route::get('/requests', [
+       'as' => 'displayrequests',
+        'uses' => 'RequestController@displayRequests'
+    ]);
+
     Route::get('/pendingrequests', [
         'as' => 'pendingrequests',
-        'uses' => 'RequestController@showPendingRequests'
+        'uses' => 'RequestController@pendingRequests'
     ]);
 
     Route::get('/filledrequests', [
         'as' => 'filledrequests',
-        'uses' => 'RequestController@ShowFilledRequests'
+        'uses' => 'RequestController@filledRequests'
     ]);
 
     Route::get('/declinedrequests', [
         'as' => 'declinedrequests',
-        'uses' => 'RequestController@showDeclinedRequests'
+        'uses' => 'RequestController@declinedRequests'
     ]);
 
     Route::get('/submitrequest/{tmdbid}/{type}', [
