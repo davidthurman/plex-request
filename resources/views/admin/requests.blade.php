@@ -6,6 +6,7 @@
             <button id="pending" class="btn btn-default">Pending</button>
             <button id="filled" class="btn btn-default">Filled</button>
             <button id="declined" class="btn btn-default">Declined</button>
+            <button id="cancelled" class="btn btn-default">Cancelled</button>
             <div id="requests">
                 @yield('partials.adminrequests')
             </div>
@@ -67,6 +68,22 @@
                 },
                 error: function() {
                     alert('Unable to retrieve declined requests.')
+                }
+            });
+        });
+    });
+
+    $('#cancelled').on('click', function() {
+        changeActive.call(this);
+        $(document).ready(function() {
+            $.ajax({
+                type: 'GET',
+                url: '/admin/requests/cancelled',
+                success: function (response) {
+                    $('#requests').html(response);
+                },
+                error: function() {
+                    alert('Unable to retrieve cancelled requests.')
                 }
             });
         });

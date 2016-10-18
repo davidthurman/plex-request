@@ -60,6 +60,11 @@ Route::group(['middleware' => 'admin'], function() {
                 'uses' => 'AdminController@decline'
             ]);
 
+            Route::get('/cancelled', [
+                'as' => 'admincancelledrequests',
+                'uses' => 'AdminController@cancelledRequests'
+            ]);
+
         });
 
         Route::get('/showuser/{id}', [
@@ -133,6 +138,13 @@ Route::group(['middleware' => 'auth'], function() {
         'as' => 'submitrequest',
         'uses' => 'RequestController@submit'
     ]);
+
+    Route::get('/cancel/{id}', [
+        'as' => 'cancelrequest',
+        'uses' => 'RequestController@cancel'
+    ]);
+
+    // Errors
 
     Route::get('/reporterror', [
         'as' => 'reporterror',

@@ -2,6 +2,7 @@
     @if($path == 'admin/requests/pending' || $path == 'admin/requests')Pending @endif
     @if($path == 'admin/requests/filled')Filled @endif
     @if($path == 'admin/requests/declined')Declined @endif
+    @if($path == 'admin/requests/cancelled')Cancelled @endif
     requests:
 </h2>
 <table class="table table-hover table-bordered">
@@ -16,6 +17,9 @@
         @endif
         @if($path == 'admin/requests/declined')
             <td>Date Declined:</td>
+        @endif
+        @if($path == 'admin/requests/cancelled')
+            <td>Date Cancelled:</td>
         @endif
         @if($path == 'admin/requests/pending')
             <td>Fill:</td>
@@ -34,7 +38,7 @@
                 @if($path == 'admin/requests/pending')
                     <td>{{ date('M d, Y', strtotime($request->created_at )) }}</td>
                 @endif
-                @if($path == 'admin/requests/filled' || $path == 'admin/requests/declined')
+                @if($path == 'admin/requests/filled' || $path == 'admin/requests/declined' || $path == 'admin/requests/cancelled')
                     <td>{{ date('M d, Y', strtotime($request->updated_at)) }}</td>
                 @endif
                 @if($path == 'admin/requests/pending')

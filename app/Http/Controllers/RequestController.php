@@ -173,4 +173,27 @@ class RequestController extends BaseController
 
     }
 
+    /**
+     * Cancels a user's request if he is the owner
+     * @param $id - ID of the asset to be cancelled.
+     * @return string
+     */
+    public function cancel($id) {
+
+        $request = PlexRequest::find($id);
+
+        // Ensure the current user is the owner of the request to be cancelled.
+        if ($request->userid == Auth::user()->id) {
+            // Set status to cancelled.
+            $request->status = 3;
+            if($request->save()) {
+                return json_encode(array("status"=>"success"));
+            } else {
+                return json_encode(array("status"=>"failure"));
+            }
+        } else {
+            return 'You don\'t own this asset';
+        }
+    }
+
 }

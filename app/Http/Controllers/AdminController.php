@@ -88,6 +88,15 @@ class AdminController extends BaseController
     }
 
     /**
+     * Retrieve requests with a cancelled status
+     * @return View
+     */
+    public function cancelledRequests() {
+        $requests = PlexRequest::where('status', '=', 3)->get();
+        return view('partials.requests', compact('requests'));
+    }
+
+    /**
      * Change the status of a request to filled
      * @param int $id - The ID of the request being filled.
      * @return \Illuminate\Http\RedirectResponse
