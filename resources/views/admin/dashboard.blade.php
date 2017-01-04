@@ -18,15 +18,15 @@
                         <span class="panel-title">
                             <div class="pull-left">
                                 <ul class="nav nav-tabs">
-                                    <li href="/admin/requests" class="tabs" id="requests-tab"><a href="#" ><i class="glyphicon glyphicon-print"></i> Requests</a></li>
-                                    <li href="/admin/users" class="tabs" id="users-tab"><a href="#"><i class="glyphicon glyphicon-send"></i> Users</a></li>
-                                    <li href="/admin/errors" class="tabs" id="errors-tab"><a href="#"><i class="glyphicon glyphicon-list"></i> Errors</a></li>
+                                    <li class="tabs" id="requests-tab"><a href="/admin/requests" ><i class="glyphicon glyphicon-print"></i> Requests</a></li>
+                                    <li class="tabs" id="users-tab"><a href="/admin/users"><i class="glyphicon glyphicon-send"></i> Users</a></li>
+                                    <li class="tabs" id="errors-tab"><a href="/admin/errors"><i class="glyphicon glyphicon-list"></i> Errors</a></li>
                                 </ul>
                             </div>
                             <div class="clearfix"></div>
                         </span>
                     </div>
-                    @yield('admin.partials.table')
+                    @include('admin.partials.table')
                 </div>
             </div>
         </div>

@@ -13,21 +13,14 @@ use Illuminate\View\View;
 class AdminController extends BaseController
 {
     /**
-     * Get counts for errors, requests, and users, then return admin.dashboard view
+     * Retrieve pending requests and return with admin template that houses the table partials.
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function dashboard() {
-
-        $counts = array(
-            'errors' => count(serverError::where('resolved', '=', 0)),
-            'requests' => count(PlexRequest::all()),
-            'users' => count(User::all()),
-        );
-
+        $requests = PlexRequest::where('status', '=', 0)->get();
         return view('admin.dashboard', [
-            'counts' => $counts
+            'requests' => $requests
         ]);
-
     }
 
     /**
@@ -36,7 +29,7 @@ class AdminController extends BaseController
      */
     public function users() {
         $users = User::all();
-        return view('admin.users', [
+        return view('admin.partials.table', [
             'users' => $users
         ]);
     }
@@ -47,26 +40,9 @@ class AdminController extends BaseController
      */
     public function errors() {
         $errors = serverError::where('resolved', '=', 0)->get();
-        return view('admin.errors', [
+        return view('admin.partials.table', [
             'errors' => $errors
         ]);
-    }
-
-    /**
-     * Displays the view for requests
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function displayRequests() {
-        return view('admin.requests');
-    }
-
-    /**
-     * Retrieve requests with a pending status
-     * @return View
-     */
-    public function pendingRequests() {
-        $requests = PlexRequest::where('status', '=', 0)->get();
-        return view('partials.requests', compact('requests'));
     }
 
     /**
@@ -75,7 +51,9 @@ class AdminController extends BaseController
      */
     public function filledRequests() {
         $requests = PlexRequest::where('status', '=', 1)->get();
-        return view('partials.requests', compact('requests'));
+        return view('admin.partials.table', [
+            'requests' => $requests
+        ]);
     }
 
     /**
@@ -84,7 +62,9 @@ class AdminController extends BaseController
      */
     public function declinedRequests() {
         $requests = PlexRequest::where('status', '=', 2)->get();
-        return view('partials.requests', compact('requests'));
+        return view('admin.partials.table', [
+            'requests' => $requests
+        ]);
     }
 
     /**
@@ -93,7 +73,9 @@ class AdminController extends BaseController
      */
     public function cancelledRequests() {
         $requests = PlexRequest::where('status', '=', 3)->get();
-        return view('partials.requests', compact('requests'));
+        return view('admin.partials.table', [
+            'requests' => $requests
+        ]);
     }
 
     /**

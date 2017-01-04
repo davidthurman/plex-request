@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <ul class="nav navbar-nav pull-left">
-                    <li class="navbar-welcome"><a href="/">Hello {{ Auth::user()->name }}!</a></li>
+                    <li class="navbar-welcome"><a href="/">Plex Request</a></li>
                 </ul>
             </div>
             <div class="collapse navbar-collapse" id="plexnavbar">

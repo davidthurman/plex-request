@@ -1,18 +1,13 @@
-@extends('layout.admin')
-@section('title')Admin @stop
-@section('content')
-    <div class="container">
-        <div class="col-xs-12 col-md-10 col-md-offset-1">
-            <button id="pending" class="btn btn-default">Pending</button>
-            <button id="filled" class="btn btn-default">Filled</button>
-            <button id="declined" class="btn btn-default">Declined</button>
-            <button id="cancelled" class="btn btn-default">Cancelled</button>
-            <div id="requests">
-                @yield('partials.adminrequests')
-            </div>
+<div class="container">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+        <button id="pending" class="btn btn-default">Pending</button>
+        <button id="filled" class="btn btn-default">Filled</button>
+        <button id="declined" class="btn btn-default">Declined</button>
+        <button id="cancelled" class="btn btn-default">Cancelled</button>
+        <div id="requests">
         </div>
     </div>
-@stop
+</div>
 @section('jsadditions')
 <script type="text/javascript">
 

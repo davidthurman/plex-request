@@ -13,26 +13,11 @@ Route::group(['middleware' => 'admin'], function() {
             'uses' => 'AdminController@dashboard'
         ]);
 
-        Route::get('/requests/pending', [
-            'as' => 'adminpendingrequests',
-            'uses' => 'AdminController@pendingRequests'
-        ]);
-
-        Route::get('/users', [
-            'as' => 'adminusers',
-            'uses' => 'AdminController@users'
-        ]);
-
-        Route::get('/errors', [
-            'as' => 'adminerrors',
-            'uses' => 'AdminController@errors'
-        ]);
-
         Route::group(['prefix' => '/requests'], function() {
 
             Route::get('/', [
-                'as' => 'admindisplayrequests',
-                'uses' => 'AdminController@displayRequests'
+                'as' => 'adminpendingrequests',
+                'uses' => 'AdminController@pendingRequests'
             ]);
 
             Route::get('/pending', [
@@ -67,27 +52,43 @@ Route::group(['middleware' => 'admin'], function() {
 
         });
 
-        Route::get('/showuser/{id}', [
-            'as' => 'showuser',
-            'uses' => 'UsersController@showuser'
-        ]);
+        Route::group(['prefix' => '/users'], function() {
 
-        Route::post('/edituser', [
-            'as' => 'edituser',
-            'uses' => 'UsersController@edituser'
-        ]);
+            Route::get('/', [
+                'as' => 'adminusers',
+                'uses' => 'AdminController@users'
+            ]);
 
-        Route::get('/deleteuser/{id}', [
-            'as' => 'destroyuser',
-            'uses' => 'UsersController@destroy'
-        ]);
+            Route::get('/showuser/{id}', [
+                'as' => 'showuser',
+                'uses' => 'UsersController@showuser'
+            ]);
 
+            Route::post('/edit', [
+                'as' => 'edituser',
+                'uses' => 'UsersController@edituser'
+            ]);
 
+            Route::get('/delete/{id}', [
+                'as' => 'destroyuser',
+                'uses' => 'UsersController@destroy'
+            ]);
 
-        Route::get('/resolveerror/{id}', [
-            'as' => 'resolveerror',
-            'uses' => 'ErrorController@resolve'
-        ]);
+        });
+
+        Route::group(['prefix' => '/errors'], function() {
+
+            Route::get('/', [
+                'as' => 'adminerrors',
+                'uses' => 'AdminController@errors'
+            ]);
+
+            Route::get('/resolve/{id}', [
+                'as' => 'resolveerror',
+                'uses' => 'ErrorController@resolve'
+            ]);
+
+        });
 
     });
 
