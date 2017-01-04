@@ -8,21 +8,26 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+
+    /**
+     * Handle and authentication attempt.
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function authenticate(Request $request)
+    {
+        if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
+            // Authentication passed...
+            return redirect()->intended('/');
+        } else {
+            return redirect()->route('/login')->with(\Session::flash('failure', 'Your credentials were incorrect.'));        }
+    }
 
     /**
      * Where to redirect users after login / registration.

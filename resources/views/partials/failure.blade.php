@@ -1,5 +1,5 @@
 @if (Session::has('failure'))
-    <div id="flashMessage" class="failure col-xs-12 col-md-6 col-md-offset-3">
+    <div id="flashMessage" class="failure">
         <div class="alert alert-danger">
             {{ session('failure') }}
         </div>
