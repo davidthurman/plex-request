@@ -1,7 +1,4 @@
-@extends('layout.admin')
-@section('title')Admin @stop
-@section('content')
-    <div class="container">
+ <div class="container">
         <div class="col-xs-12 col-md-10 col-md-offset-1">
             <h2>Reported errors:</h2>
             <br>
@@ -22,5 +19,4 @@
                 @endforeach
             </table>
         </div>
-    </div>
-@stop
+</div>

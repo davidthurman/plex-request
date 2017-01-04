@@ -36,19 +36,19 @@
     </div>
 @stop
 @section('jsadditions')
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                document.getElementById("admincheckbox").innerHTML = xhttp.responseText;
-            }
-        };
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+if (xhttp.readyState == 4 && xhttp.status == 200) {
+document.getElementById("admincheckbox").innerHTML = xhttp.responseText;
+}
+};
 
-        function changeAdminState() {
-            xhttp.open("GET", "/admin/user/changeadminstate", true);
-            xhttp.send();
-        }
+function changeAdminState() {
+xhttp.open("GET", "/admin/user/changeadminstate", true);
+xhttp.send();
+}
 
-    </script>
+</script>
 @stop

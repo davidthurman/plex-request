@@ -29,7 +29,7 @@
                     e.preventDefault();
                 });
 
-                $("#flashMessage").delay(4000).slideUp("slow");
+                $(".alert").delay(4000).slideUp("slow");
 
             });
         </script>
