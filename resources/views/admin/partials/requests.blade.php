@@ -1,88 +1,22 @@
-<div class="container">
-    <div class="col-xs-12 col-md-10 col-md-offset-1">
+<form method="post" action="">
+    <table class="table table-bordered table-hover table-striped">
         <button id="pending" class="btn btn-default">Pending</button>
         <button id="filled" class="btn btn-default">Filled</button>
         <button id="declined" class="btn btn-default">Declined</button>
         <button id="cancelled" class="btn btn-default">Cancelled</button>
-        <div id="requests">
-        </div>
-    </div>
-</div>
-@section('jsadditions')
-<script type="text/javascript">
-
-    $(document).ready (function() {
-        $('#pending').click();
-    });
-
-    function changeActive() {
-        $(".btn").removeClass("btn-primary");
-        $(this).addClass("btn-primary");
-    }
-
-    $('#pending').on('click', function() {
-        changeActive.call(this);
-        $(document).ready(function() {
-            $.ajax({
-                type: 'GET',
-                url: '/admin/requests/pending',
-                success: function (response) {
-                    $('#requests').html(response);
-                },
-                error: function() {
-                    alert('Unable to retrieve pending requests.')
-                }
-            });
-        });
-    });
-
-    $('#filled').on('click', function() {
-        changeActive.call(this);
-        $(document).ready(function() {
-            $.ajax({
-                type: 'GET',
-                url: '/admin/requests/filled',
-                success: function (response) {
-                    $('#requests').html(response);
-                },
-                error: function() {
-                    alert('Unable to retrieve filled requests.')
-                }
-            });
-        });
-    });
-
-    $('#declined').on('click', function() {
-        changeActive.call(this);
-        $(document).ready(function() {
-            $.ajax({
-                type: 'GET',
-                url: '/admin/requests/declined',
-                success: function (response) {
-                    $('#requests').html(response);
-                },
-                error: function() {
-                    alert('Unable to retrieve declined requests.')
-                }
-            });
-        });
-    });
-
-    $('#cancelled').on('click', function() {
-        changeActive.call(this);
-        $(document).ready(function() {
-            $.ajax({
-                type: 'GET',
-                url: '/admin/requests/cancelled',
-                success: function (response) {
-                    $('#requests').html(response);
-                },
-                error: function() {
-                    alert('Unable to retrieve cancelled requests.')
-                }
-            });
-        });
-    });
-
-</script>
-@stop
+        <tr>
+            <th>Title</th>
+            <th>User</th>
+            <th>Requested on</th>
+            <th>Status</th>
+        </tr>
+        @foreach($requests as $request)
+            <tr>
+                <td>{{ $request->title }}</td>
+                <td>{{ $request->user }}</td>
+                <td>{{ $request->created_at }}</td>
+                <td>{{ $request->status }}</td>
+            </tr>
+        @endforeach
+    </table>
+</form>
