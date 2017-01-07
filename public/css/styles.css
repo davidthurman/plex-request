@@ -4,17 +4,12 @@ body {
     padding-top: 70px;
     overflow-y: auto;
     background-color:#323232;
-    /*color:#fff;*/
     font-family: 'Roboto', sans-serif;
     font-weight:100;
 }
 
 h1, h2, h3, h4, h5, h6 {
     color: #ff8a00;
-}
-
-p {
-    color: black!important;
 }
 
 hr {
@@ -30,6 +25,23 @@ hr {
 
 hr:last-child {
     display: none;
+}
+
+strong {
+    color: white;
+}
+
+p {
+    color: white;
+}
+
+label {
+    color: white;
+}
+
+.help-block {
+    color: #fff!important;
+    font-weight: 300;
 }
 
 .margin-bottom-30 {
@@ -69,6 +81,7 @@ hr:last-child {
 
 .panel-body {
     background-color: #323232!important;
+    border: 1px solid #e67e00;
 }
 
 .btn-plex {
@@ -79,21 +92,21 @@ hr:last-child {
 }
 
 .btn-plex:hover {
-    color: black;
-    background-color: #ff8a00;
-    border: 1px solid black;
+    color: white;
+    background-color: #e67e00;
+    border: 1px solid #fa8800;
 }
 
 .btn-plex:active {
-    color: black;
+    color: white;
     background-color: #ff8a00;
-    border: 1px solid black;
+    border: 1px solid #e67e00;
 }
 
 .btn-plex:visited {
-    color: black;
+    color: white;
     background-color: #ff8a00;
-    border: 1px solid black;
+    border: 1px solid #e67e00;
 }
 
 .panel-default>.panel-heading {
@@ -183,6 +196,26 @@ li.navbar-welcome {
 
 .searchrequestsubmit {
     color: white!important;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #fff;
+    background-color: #fa8800;
+    border: 1px solid #fa8800;
+}
+
+.nav-tabs>li>a {
+    color: white;
+}
+
+.nav-tabs>li>a:hover {
+    color: white;
+    background-color: #fa8800;
+    border: 1px solid #fa8800;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #fa8800;
 }
 
 @media (min-width: 1330px) {

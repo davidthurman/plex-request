@@ -11,7 +11,7 @@
         </ul>
         <br>
         <div id="requests" class="text-center">
-            @yield('partials.userrequests')
+            @yield('partials.request')
         </div>
     </div>
 </div>

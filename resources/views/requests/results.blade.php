@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-xs-8">
                                 <a href="https://www.themoviedb.org/movie/{{ $movie['id'] }}" target="_blank">
-                                    <button class="btn btn-default">More...</button>
+                                    <button class="btn btn-default">More</button>
                                 </a>
                                 <a class="searchrequestsubmit" href="{{ route('submitrequest', ['tmdbid' => $movie['id'], 'type' => $type]) }}">
                                     <button class="btn btn-plex">Submit</button>
@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="col-xs-8">
                                     <a href="https://www.themoviedb.org/tv/{{ $tvshow['id'] }}" target="_blank">
-                                        <button class="btn btn-default">More...</button>
+                                        <button class="btn btn-default">More</button>
                                     </a>
                                     <a class="searchrequestsubmit" href="{{ route('submitrequest', ['tmdbid' => $tvshow['id'], 'type' => $type]) }}">
                                         <button class="btn btn-plex">Submit</button>
