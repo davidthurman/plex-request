@@ -5,8 +5,7 @@
     <a id="cancelled" class="btn btn-default">Cancelled</a>
 </div>
 <br>
-@if(count($requests) > 0)
-<form method="post" action="">
+@if(count($plexrequests) > 0)
     <table class="table table-bordered table-hover table-striped">
         <tr>
             <th>Title</th>
@@ -15,19 +14,20 @@
             <th>Status</th>
             <th>Action</th>
         </tr>
-        @foreach($requests as $request)
-            <tr>
+        @foreach($plexrequests as $plexrequest)
+            <tr data-id="{{ $plexrequest->id }}">
                 <td>
-                    @if($request->media_type === 'movie')
-                        <a href="https://www.themoviedb.org/movie/{{ $request->tmdbid }}" target="_blank">{{ $request->title }}</a>
+                    @if($plexrequest->media_type === 'movie')
+                        <a href="https://www.themoviedb.org/movie/{{ $plexrequest->tmdbid }}" target="_blank">{{ $plexrequest->title }}</a>
                     @else
-                        <a href="https://www.themoviedb.org/tv/{{ $request->tmdbid }}" target="_blank">{{ $request->title }}</a>
+                        <a href="https://www.themoviedb.org/tv/{{ $plexrequest->tmdbid }}" target="_blank">{{ $plexrequest->title }}</a>
                     @endif
                 </td>
-                <td>{{ $request->user }}</td>
-                <td>{{ date( 'F d, Y', strtotime($request->created_at)) }}</td>
-                <td>@php
-                        switch($request->status) {
+                <td>{{ $plexrequest->user }}</td>
+                <td>{{ date( 'F d, Y', strtotime($plexrequest->created_at)) }}</td>
+                <td>
+                    @php
+                        switch($plexrequest->status) {
                             case 0:
                                 echo 'Pending';
                                 break;
@@ -46,25 +46,49 @@
                     @endphp
                 </td>
                 <td>
-                    @if($request->status === 0 || $request->status === 2)<a href="{{ route('fillrequest', $request->id) }}" class="btn btn-xs btn-primary white-link">Fill</a>@endif
-                        @if($request->status === 0 || $request->status === 1)<a href="{{ route('declinerequest', $request->id) }}" class="btn btn-xs btn-danger white-link">Decline</a>@endif
+                    @if($plexrequest->status === 0 || $plexrequest->status === 2)
+                        <a id="{{ $plexrequest->id }}" class="btn btn-xs btn-primary white-link fillbutton" data-toggle="modal" data-target="#fillmodal">Fill</a>
+                    @endif
+                    @if($plexrequest->status === 0 || $plexrequest->status === 1)
+                        <a id="{{ $plexrequest->id }}" class="btn btn-xs btn-danger white-link declinebutton" data-toggle="modal" data-target="#declinemodal">Decline</a>
+                    @endif
                 </td>
             </tr>
         @endforeach
     </table>
-    <div class="modal fade" tabindex="-1" role="dialog">
+<form method="POST" action="">
+    {{ csrf_field() }}
+    <div id="fillmodal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Modal title</h4>
+                    <h4 class="modal-title">Write a comment for the user:</h4>
                 </div>
                 <div class="modal-body">
-                    <p>One fine body&hellip;</p>
+                    <textarea class="adminresponse" name="adminresponse" rows="5" cols="75"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary white-link">Submit</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</form>
+<form method="POST" action="">
+    {{ csrf_field() }}
+    <div id="declinemodal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Write a comment for the user:</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea class="adminresponse" name="adminresponse" rows="5" cols="75"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary white-link">Submit</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

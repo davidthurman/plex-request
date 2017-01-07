@@ -35,12 +35,12 @@ Route::group(['middleware' => 'admin'], function() {
                 'uses' => 'AdminController@declinedRequests'
             ]);
 
-            Route::get('/fill/{id}', [
+            Route::post('/fill/{id}', [
                 'as' => 'fillrequest',
                 'uses' => 'AdminController@fill'
             ]);
 
-            Route::get('/decline/{id}', [
+            Route::post('/decline/{id}', [
                 'as' => 'declinerequest',
                 'uses' => 'AdminController@decline'
             ]);

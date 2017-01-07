@@ -9,6 +9,20 @@ $(document).ready(function() {
         $(this).addClass('active');
     });
 
+    $(document).on('click', '.fillbutton', function() {
+        var id = $(this).attr('id');
+        $('#fillmodal').modal();
+        $('#fillmodal').closest('form').attr('action', '/requests/fill/' + id);
+        console.log(id);
+    });
+
+    $(document).on('click', '.declinebutton', function() {
+        var id = $(this).attr('id');
+        $('#declinemodal').modal();
+        $('#declinemodal').closest('form').attr('action', '/requests/decline/' + id);
+        console.log(id);
+    });
+
     $(document).on('click', '#requests-tab,#pending', function() {
         $.ajax({
             type: 'GET',

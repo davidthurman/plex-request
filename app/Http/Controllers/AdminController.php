@@ -9,6 +9,7 @@ use App\PlexRequest;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Auth\Access\Response;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Input;
 
 class AdminController extends BaseController
 {
@@ -17,9 +18,9 @@ class AdminController extends BaseController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function dashboard() {
-        $requests = PlexRequest::where('status', '=', 0)->get();
+        $plexrequests = PlexRequest::where('status', '=', 0)->get();
         return view('admin.dashboard', [
-            'requests' => $requests
+            'plexrequests' => $plexrequests
         ]);
     }
 
@@ -28,9 +29,9 @@ class AdminController extends BaseController
      * @return View
      */
     public function pendingRequests() {
-        $requests = PlexRequest::where('status', '=', 0)->get();
+        $plexrequests = PlexRequest::where('status', '=', 0)->get();
         return view('admin.partials.requests', [
-            'requests' => $requests
+            'plexrequests' => $plexrequests
         ]);
     }
 
@@ -39,9 +40,9 @@ class AdminController extends BaseController
      * @return View
      */
     public function filledRequests() {
-        $requests = PlexRequest::where('status', '=', 1)->get();
+        $plexrequests = PlexRequest::where('status', '=', 1)->get();
         return view('admin.partials.requests', [
-            'requests' => $requests
+            'plexrequests' => $plexrequests
         ]);
     }
 
@@ -50,9 +51,9 @@ class AdminController extends BaseController
      * @return View
      */
     public function declinedRequests() {
-        $requests = PlexRequest::where('status', '=', 2)->get();
+        $plexrequests = PlexRequest::where('status', '=', 2)->get();
         return view('admin.partials.requests', [
-            'requests' => $requests
+            'plexrequests' => $plexrequests
         ]);
     }
 
@@ -61,9 +62,9 @@ class AdminController extends BaseController
      * @return View
      */
     public function cancelledRequests() {
-        $requests = PlexRequest::where('status', '=', 3)->get();
+        $plexrequests = PlexRequest::where('status', '=', 3)->get();
         return view('admin.partials.requests', [
-            'requests' => $requests
+            'plexrequests' => $plexrequests
         ]);
     }
 
@@ -92,13 +93,15 @@ class AdminController extends BaseController
     /**
      * Change the status of a request to filled
      * @param int $id - The ID of the request being filled.
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function fill($id) {
-        $request = PlexRequest::findOrFail($id);
-        $request->status = 1;
-        $request->save();
-        if ($request->save()) {
+    public function fill($id, Request $request) {
+        $plexrequest = PlexRequest::findOrFail($id);
+        $plexrequest->status = 1;
+        $plexrequest->admin_response = $request->get('adminresponse');
+        $plexrequest->save();
+        if ($plexrequest->save()) {
             return redirect()->back()->with(\Session::flash('success', 'Request has been marked as filled.'));
         } else {
             return redirect()->back()->with(\Session::flash('failure', 'There was a problem. The request was not marked filled.'));
@@ -108,13 +111,15 @@ class AdminController extends BaseController
     /**
      * Change the status of a request to declined
      * @param int $id - The ID of the request being filled
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function decline($id) {
-        $request = PlexRequest::findOrFail($id);
-        $request->status = 2;
-        $request->save();
-        if ($request->save()) {
+    public function decline($id, Request $request) {
+        $plexrequest = PlexRequest::findOrFail($id);
+        $plexrequest->status = 2;
+        $plexrequest->admin_response = $request->get('adminresponse');
+        $plexrequest->save();
+        if ($plexrequest->save()) {
             return redirect()->back()->with(\Session::flash('success', 'Request has been marked as declined.'));
         } else {
             return redirect()->back()->with(\Session::flash('failure', 'There was a problem. The request was not marked declined.'));

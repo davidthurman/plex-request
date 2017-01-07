@@ -10,6 +10,10 @@ use App\User;
 class UsersController extends BaseController
 {
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function edituser(Request $request) {
 
         $admincheckboxes = $request->input('admincheckbox');
