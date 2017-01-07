@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>@yield('title') | Plex Requests</title>
+        <title>Admin Panel | Plex Requests</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
@@ -18,9 +18,14 @@
                         <span class="panel-title">
                             <div class="pull-left">
                                 <ul class="nav nav-tabs">
-                                    <li class="tabs" id="requests-tab"><a href="#" ><i class="glyphicon glyphicon-print"></i> Requests</a></li>
-                                    <li class="tabs" id="users-tab"><a href="#"><i class="glyphicon glyphicon-send"></i> Users</a></li>
+                                    <li class="tabs" id="requests-tab"><a href="#" ><i class="glyphicon glyphicon-film"></i> Requests</a></li>
+                                    <li class="tabs" id="users-tab"><a href="#"><i class="glyphicon glyphicon-user"></i> Users</a></li>
                                     <li class="tabs" id="errors-tab"><a href="#"><i class="glyphicon glyphicon-list"></i> Errors</a></li>
+                                </ul>
+                            </div>
+                            <div class="pull-right">
+                                <ul class="nav nav-tabs">
+                                    <li class="tabs"><a href="{{ route('home') }}"><i class="glyphicon glyphicon-home"></i> Return</a></li>
                                 </ul>
                             </div>
                             <div class="clearfix"></div>
@@ -29,7 +34,6 @@
                     <!-- Filled by partials after ajax call -->
                     <div id="panel-body" class="panel-body">
                     </div>
-
                 </div>
             </div>
         </div>

@@ -59,11 +59,6 @@ Route::group(['middleware' => 'admin'], function() {
                 'uses' => 'AdminController@users'
             ]);
 
-            Route::get('/showuser/{id}', [
-                'as' => 'showuser',
-                'uses' => 'UsersController@showuser'
-            ]);
-
             Route::post('/edit', [
                 'as' => 'edituser',
                 'uses' => 'UsersController@edituser'
@@ -72,6 +67,11 @@ Route::group(['middleware' => 'admin'], function() {
             Route::get('/delete/{id}', [
                 'as' => 'destroyuser',
                 'uses' => 'UsersController@destroy'
+            ]);
+
+            Route::get('/{id}', [
+                'as' => 'showuser',
+                'uses' => 'UsersController@showuser'
             ]);
 
         });
