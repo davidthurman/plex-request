@@ -20,7 +20,7 @@
             </a>
         </div>
     </div>
-    <hr>
+    <hr class="divider">
 @endforeach
 <script type="text/javascript">
     $(function() {
@@ -42,7 +42,7 @@
                 dataType: 'json',
                 success: function (response) {
                     if(response.status == 'success') {
-                        $('#asset-' + id).fadeOut(500);
+                        $('#asset-' + id).fadeOut(500).next().fadeOut(500);
                     } else {
                         alert('Failed to cancel request.');
                     }

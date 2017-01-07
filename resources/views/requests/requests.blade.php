@@ -1,11 +1,9 @@
-@extends('layout.public')
+@extends('master')
 @section('title')Your requests @stop
 @section('content')
 <div id="requestsdisplay">
     <div class="col-xs-12 col-md-10 col-md-offset-1">
-        <div class="page-header">
-            <h1>Your requests:</h1>
-        </div>
+        <h1 class="margin-bottom-30">Your requests:</h1>
         <ul class="nav nav-tabs">
             <li id="pending" @if($path == 'pendingrequests')class="active"@endif><a href="#">Pending</a></li>
             <li id="filled" @if($path == 'filledrequests')class="active"@endif><a href="#">Filled</a></li>

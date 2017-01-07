@@ -11,6 +11,7 @@ use Illuminate\Auth\Access\Response;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Input;
 
+
 class AdminController extends BaseController
 {
     /**
@@ -19,7 +20,7 @@ class AdminController extends BaseController
      */
     public function dashboard() {
         $plexrequests = PlexRequest::where('status', '=', 0)->get();
-        return view('admin.dashboard', [
+        return view('admin.master', [
             'plexrequests' => $plexrequests
         ]);
     }

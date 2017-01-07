@@ -1,4 +1,4 @@
-@extends('layout.unauthed')
+@extends('guest')
 @section('title')Login @stop
 @section('content')
     <div class="container">

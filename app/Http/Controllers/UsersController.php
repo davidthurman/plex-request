@@ -32,7 +32,7 @@ class UsersController extends BaseController
         $user = User::findOrFail($id);
         $activepage = 'admin';
 
-        return view('showuser', compact('user', 'activepage'));
+        return view('user.profile', compact('user', 'activepage'));
 
     }
 

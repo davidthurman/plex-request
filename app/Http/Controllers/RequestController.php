@@ -21,7 +21,7 @@ class RequestController extends BaseController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function displayRequests() {
-        return view('userrequests');
+        return view('requests.requests');
     }
 
     /**
@@ -32,7 +32,7 @@ class RequestController extends BaseController
         $requests = PlexRequest::where('userid', '=', Auth::user()->id)
             ->where('status', '=', 0)->get();
         
-        return view('partials.userrequests', compact('requests'));
+        return view('requests.partials.request', compact('requests'));
     }
 
     /**
@@ -43,7 +43,7 @@ class RequestController extends BaseController
         $requests = PlexRequest::where('userid', '=', Auth::user()->id)
             ->where('status', '=', 1)->get();
 
-        return view('partials.userrequests', compact('requests'));
+        return view('requests.partials.request', compact('requests'));
     }
 
     /**
@@ -54,7 +54,7 @@ class RequestController extends BaseController
         $requests = PlexRequest::where('userid', '=', Auth::user()->id)
             ->where('status', '=', 2)->get();
 
-        return view('partials.userrequests', compact('requests'));
+        return view('requests.partials.request', compact('requests'));
     }
 
     /**
@@ -62,7 +62,7 @@ class RequestController extends BaseController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function searchPage() {
-        return view('searchpage');
+        return view('requests.search');
     }
 
     /**
@@ -83,7 +83,7 @@ class RequestController extends BaseController
 
         if (array_key_exists('total_results', $json) && $json['total_results'] == 0) {
 
-            return view('searchresults', [
+            return view('requests.results', [
                 'json' => $json,
                 'type' => $type,
                 'query' => $query
@@ -91,7 +91,7 @@ class RequestController extends BaseController
 
         } else {
 
-            return view('searchresults', [
+            return view('requests.results', [
                 'json' => $json,
                 'type' => $type,
                 'query' => $query

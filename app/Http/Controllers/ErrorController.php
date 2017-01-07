@@ -18,10 +18,7 @@ class ErrorController extends BaseController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function reportError() {
-
-        $activepage = 'reporterror';
-
-        return view('reporterror', compact('activepage'));
+        return view('errors.report');
     }
 
     /**

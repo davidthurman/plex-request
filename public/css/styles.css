@@ -4,7 +4,7 @@ body {
     padding-top: 70px;
     overflow-y: auto;
     background-color:#323232;
-    color:#fff;
+    /*color:#fff;*/
     font-family: 'Roboto', sans-serif;
     font-weight:100;
 }
@@ -13,11 +13,14 @@ h1, h2, h3, h4, h5, h6 {
     color: #ff8a00;
 }
 
+p {
+    color: black!important;
+}
+
 hr {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid #ccc;
     margin: 1em 0;
     padding: 0;
     color: #ff8a00;
@@ -27,6 +30,10 @@ hr {
 
 hr:last-child {
     display: none;
+}
+
+.margin-bottom-30 {
+    margin-bottom: 30px;
 }
 
 .glyphicon.spinning {
@@ -48,12 +55,20 @@ hr:last-child {
     color: white!important;
 }
 
+.btn-danger {
+    background-color: #ff8a00;
+}
+
 .buttons {
     margin-top: 25px !important;
 }
 
 .noDisplay {
     display: none;
+}
+
+.panel-body {
+    background-color: #323232!important;
 }
 
 .btn-plex {

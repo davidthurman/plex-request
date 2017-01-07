@@ -163,27 +163,39 @@ Route::group(['middleware' => 'auth'], function() {
  * Public routes
  */
 
-Route::get('register', [
- 'as' => 'register',
- 'uses' => 'Auth\AuthController@getRegister',
-]);
+//Route::get('register', [
+// 'as' => 'register',
+// 'uses' => 'AuthController@getRegister',
+//]);
+//
+//Route::get('login', [
+//    'as' => 'login',
+//    'uses' => 'AuthController@getLogin',
+//]);
+//
+//Route::post('login', 'AuthController@postLogin');
+//
+//Route::get('logout', [
+//    'as' => 'logout',
+//    'uses' => 'AuthController@getLogout',
+//]);
 
-Route::get('login', [
-    'as' => 'login',
-    'uses' => 'Auth\AuthController@getLogin',
-]);
+ // Authentication Routes...
+ $this->get('login', 'AuthController@showLoginForm');
+ $this->post('login', 'AuthController@login');
+ $this->get('logout', 'AuthController@logout');
 
-Route::post('login', 'Auth\AuthController@postLogin');
+ // Registration Routes...
+ $this->get('register', 'AuthController@showRegistrationForm');
+ $this->post('register', 'AuthController@register');
 
-Route::get('logout', [
-    'as' => 'logout',
-    'uses' => 'Auth\AuthController@getLogout',
-]);
-
-Route::auth();
+ // Password Reset Routes...
+ $this->get('password/reset/{token?}', 'PasswordController@showResetForm');
+ $this->post('password/email', 'PasswordController@sendResetLinkEmail');
+ $this->post('password/reset', 'PasswordController@reset');
 
 Route::group(['middleware' => 'registration'], function() {
 
-    Route::post('register', 'Auth\AuthController@postRegister');
+    Route::post('register', 'AuthController@postRegister');
 
 });

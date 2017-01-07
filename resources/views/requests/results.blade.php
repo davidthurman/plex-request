@@ -1,4 +1,4 @@
-@extends('layout.public')
+@extends('master')
 @section('title')Search results @stop
 
 @section('content')
@@ -36,7 +36,7 @@
                             </div>
                             <div class="col-md-8">
                                 <a href="https://www.themoviedb.org/movie/{{ $movie['id'] }}" target="_blank"><h3>{{ $movie['title'] . " (" . date('Y', strtotime($movie['release_date'])) . ")"}}</h3></a><br>
-                                <span class="resultsummary">{{ str_limit($movie['overview'], 300) }}</span>
+                                <p>{{ str_limit($movie['overview'], 300) }}</p>
                             </div>
                         </div>
                         <div class="row">

@@ -1,4 +1,4 @@
-@extends('layout.public')
+@extends('master')
 @section('title')Report an error @stop
 @section('content')
 <div class="container">
