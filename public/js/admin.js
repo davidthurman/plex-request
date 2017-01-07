@@ -9,7 +9,7 @@ $(document).ready(function() {
         $(this).addClass('active');
     });
 
-    $('#requests-tab,#pending').on('click', function() {
+    $(document).on('click', '#requests-tab,#pending', function() {
         $.ajax({
             type: 'GET',
             url: '/admin/requests/pending',
@@ -22,7 +22,7 @@ $(document).ready(function() {
         });
     });
 
-    $('#filled').on('click', function() {
+    $(document).on('click', '#filled', function() {
         $.ajax({
             type: 'GET',
             url: '/admin/requests/filled',
@@ -35,7 +35,7 @@ $(document).ready(function() {
         });
     });
 
-    $('#declined').on('click', function() {
+    $(document).on('click', '#declined', function() {
         $.ajax({
             type: 'GET',
             url: '/admin/requests/declined',
@@ -48,7 +48,7 @@ $(document).ready(function() {
         });
     });
 
-    $('#cancelled').on('click', function() {
+    $(document).on('click', '#cancelled', function() {
         $.ajax({
             type: 'GET',
             url: '/admin/requests/cancelled',
@@ -61,7 +61,7 @@ $(document).ready(function() {
         });
     });
 
-    $('#users-tab').on('click', function() {
+    $(document).on('click', '#users-tab', function() {
         $.ajax({
             type: 'GET',
             url: '/admin/users',
@@ -74,7 +74,7 @@ $(document).ready(function() {
         });
     });
 
-    $('#errors-tab').on('click', function() {
+    $(document).on('click', '#errors-tab', function() {
         $.ajax({
             type: 'GET',
             url: '/admin/errors',

@@ -3,8 +3,9 @@
 @section('content')
 <div id="requestsdisplay">
     <div class="col-xs-12 col-md-10 col-md-offset-1">
-        <h1>Your requests:</h1>
-        <br>
+        <div class="page-header">
+            <h1>Your requests:</h1>
+        </div>
         <ul class="nav nav-tabs">
             <li id="pending" @if($path == 'pendingrequests')class="active"@endif><a href="#">Pending</a></li>
             <li id="filled" @if($path == 'filledrequests')class="active"@endif><a href="#">Filled</a></li>

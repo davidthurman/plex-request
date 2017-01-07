@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,700,500);
 
 body {
-    margin-top: 150px;
+    padding-top: 70px;
     overflow-y: auto;
     background:#F7F7F7;
     color:#666666;

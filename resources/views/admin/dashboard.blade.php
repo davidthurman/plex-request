@@ -26,12 +26,12 @@
                             <div class="clearfix"></div>
                         </span>
                     </div>
+                    <!-- Filled by partials after ajax call -->
                     <div id="panel-body" class="panel-body">
-
                     </div>
+
                 </div>
             </div>
         </div>
-        @yield('jsadditions')
     </body>
 </html>
