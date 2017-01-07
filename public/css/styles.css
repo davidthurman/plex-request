@@ -3,14 +3,30 @@
 body {
     padding-top: 70px;
     overflow-y: auto;
-    background:#F7F7F7;
-    color:#666666;
+    background-color:#323232;
+    color:#fff;
     font-family: 'Roboto', sans-serif;
     font-weight:100;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: black;
+    color: #ff8a00;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+    color: #ff8a00;
+    background-color: #ff8a00;
+    border-color: #ff8a00;
+}
+
+hr:last-child {
+    display: none;
 }
 
 .glyphicon.spinning {
@@ -140,6 +156,14 @@ a:hover {
 
 .navbar-default .navbar-nav>li>a:visited {
     color: white;
+}
+
+.navbar-default {
+    border-color: #ff8a00;
+}
+
+li.navbar-welcome {
+    background-color: #ff8a00;
 }
 
 .searchrequestsubmit {
