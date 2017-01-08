@@ -29,7 +29,7 @@
             @if($path == 'declinedrequests')
                 <br><strong>Date declined:</strong> <p>{{ date('M d, Y', strtotime($request->updated_at)) }}</p>
             @endif
-            <p>Notes: {{ $request['response_notes'] or 'No response from admin' }}</p>
+            <p>Notes: {{ $request['admin_response'] or 'No response from admin' }}</p>
         </div>
     </div>
     <hr class="divider">

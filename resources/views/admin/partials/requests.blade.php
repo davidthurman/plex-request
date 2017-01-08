@@ -1,8 +1,8 @@
 <div class="row text-center">
-    <a id="pending" class="btn btn-default">Pending</a>
-    <a id="filled" class="btn btn-default">Filled</a>
-    <a id="declined" class="btn btn-default">Declined</a>
-    <a id="cancelled" class="btn btn-default">Cancelled</a>
+    <a id="pending" class="btn btn-default status-buttons">Pending</a>
+    <a id="filled" class="btn btn-default status-buttons">Filled</a>
+    <a id="declined" class="btn btn-default status-buttons">Declined</a>
+    <a id="cancelled" class="btn btn-default status-buttons">Cancelled</a>
 </div>
 <br>
 @if(count($plexrequests) > 0)
@@ -12,7 +12,9 @@
             <th>User</th>
             <th>Requested on</th>
             <th>Status</th>
-            <th>Action</th>
+            @if($path != 'admin/requests/cancelled')
+                <th>Action</th>
+            @endif
         </tr>
         @foreach($plexrequests as $plexrequest)
             <tr data-id="{{ $plexrequest->id }}">
@@ -45,14 +47,16 @@
                         }
                     @endphp
                 </td>
-                <td>
-                    @if($plexrequest->status === 0 || $plexrequest->status === 2)
-                        <a id="{{ $plexrequest->id }}" class="btn btn-xs btn-primary white-link fillbutton" data-toggle="modal" data-target="#fillmodal">Fill</a>
-                    @endif
-                    @if($plexrequest->status === 0 || $plexrequest->status === 1)
-                        <a id="{{ $plexrequest->id }}" class="btn btn-xs btn-danger white-link declinebutton" data-toggle="modal" data-target="#declinemodal">Decline</a>
-                    @endif
-                </td>
+                @if($path != 'admin/requests/cancelled')
+                    <td>
+                        @if($plexrequest->status === 0 || $plexrequest->status === 2)
+                            <a id="{{ $plexrequest->id }}" class="btn btn-xs btn-primary white-link fillbutton" data-toggle="modal" data-target="#fillmodal">Fill</a>
+                        @endif
+                        @if($plexrequest->status === 0 || $plexrequest->status === 1)
+                            <a id="{{ $plexrequest->id }}" class="btn btn-xs btn-danger white-link declinebutton" data-toggle="modal" data-target="#declinemodal">Decline</a>
+                        @endif
+                    </td>
+                @endif
             </tr>
         @endforeach
     </table>

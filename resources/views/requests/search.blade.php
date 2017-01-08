@@ -5,7 +5,7 @@
     <form class="form-inline" style="margin-bottom: 100px;" role="form" method="POST" action="{{ route('searchrequest') }}">
         {{ csrf_field() }}
         <h1>Search</h1>
-        <h3>If you would like to submit a request for content to be added to the server, search and submit!</h3>
+        <h3 class="subheader">If you would like to submit a request for content to be added to the server, search and submit!</h3>
         <br>
         <select name="mediatype" class="form-control">
             <option value="movie">Movie</option>
