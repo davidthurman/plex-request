@@ -164,9 +164,9 @@ Route::group(['middleware' => 'auth'], function() {
             'uses' => 'ApiController@search'
         ]);
 
-        Route::post('/post/{type}/{query}', [
-            'as' => 'apipost',
-            'uses' => 'ApiController@post'
+        Route::post('/requests/submit', [
+            'as' => 'apirequestsubmit',
+            'uses' => 'ApiController@requestSubmit'
         ]);
 
     });

@@ -16,7 +16,7 @@ class ApiController extends Controller
         return $json;
     }
 
-    public function post(Request $request) {
+    public function requestSubmit(Request $request) {
 
         $validator = Validator::make($request->all(), [
             'year' => 'required|integer',
