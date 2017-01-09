@@ -157,28 +157,25 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'ErrorController@submitError'
     ]);
 
+    Route::group(['prefix' => '/api'], function() {
+
+        Route::get('/search/{type}/{query}', [
+            'as' => 'apisearch',
+            'uses' => 'ApiController@search'
+        ]);
+
+        Route::post('/post/{type}/{query}', [
+            'as' => 'apipost',
+            'uses' => 'ApiController@post'
+        ]);
+
+    });
+
 });
 
 /*
  * Public routes
  */
-
-//Route::get('register', [
-// 'as' => 'register',
-// 'uses' => 'AuthController@getRegister',
-//]);
-//
-//Route::get('login', [
-//    'as' => 'login',
-//    'uses' => 'AuthController@getLogin',
-//]);
-//
-//Route::post('login', 'AuthController@postLogin');
-//
-//Route::get('logout', [
-//    'as' => 'logout',
-//    'uses' => 'AuthController@getLogout',
-//]);
 
  // Authentication Routes...
  $this->get('login', 'AuthController@showLoginForm');
