@@ -157,19 +157,7 @@ Route::group(['middleware' => 'auth'], function() {
         'uses' => 'ErrorController@submitError'
     ]);
 
-    Route::group(['prefix' => '/api'], function() {
-
-        Route::get('/search/{type}/{query}', [
-            'as' => 'apisearch',
-            'uses' => 'ApiController@search'
-        ]);
-
-        Route::post('/requests/submit', [
-            'as' => 'apirequestsubmit',
-            'uses' => 'ApiController@requestSubmit'
-        ]);
-
-    });
+    
 
 });
 
@@ -190,6 +178,20 @@ Route::group(['middleware' => 'auth'], function() {
  $this->get('password/reset/{token?}', 'PasswordController@showResetForm');
  $this->post('password/email', 'PasswordController@sendResetLinkEmail');
  $this->post('password/reset', 'PasswordController@reset');
+
+ Route::group(['prefix' => '/api'], function() {
+
+        Route::get('/search/{type}/{query}', [
+            'as' => 'apisearch',
+            'uses' => 'ApiController@search'
+        ]);
+
+        Route::post('/requests/submit', [
+            'as' => 'apirequestsubmit',
+            'uses' => 'ApiController@requestSubmit'
+        ]);
+
+    });
 
 Route::group(['middleware' => 'registration'], function() {
 
