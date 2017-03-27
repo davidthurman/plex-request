@@ -6,11 +6,11 @@
 
 -----
 
-![alt_tag](https://imgur.com/a/EsRxm)
+![alt_tag](https://i.imgur.com/ewVSZgf.png)
 
 -----
 
-![alt_tag](https://imgur.com/a/EsRxm)
+![alt_tag](https://i.imgur.com/wIZQNEF.png)
 
 -----
 
