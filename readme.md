@@ -1,8 +1,20 @@
-#plex-request
+# Plex-Request
 
-A web app for people to submit requests for content to be added to a Plex server. Uses [The Movie DB](https://www.themoviedb.org/)'s API, many thanks to them. This project is not affiliated in any way with [Plex Inc.](https://www.plex.tv/). Many thanks to them too, for creating the ultimate media streaming software.
+## Overview
 
-###Installation steps:
+**Plex-Request** is a web app for people to submit requests for content to be added to a Plex server. Uses [The Movie DB](https://www.themoviedb.org/)'s API, many thanks to them. This project is not affiliated in any way with [Plex Inc.](https://www.plex.tv/). Many thanks to them too, for creating the ultimate media streaming software.
+
+-----
+
+![alt_tag](https://imgur.com/a/EsRxm)
+
+-----
+
+![alt_tag](https://imgur.com/a/EsRxm)
+
+-----
+
+## Installation 
 
 - Clone the repo.
 - Run 'composer install' to resolve your dependencies.
@@ -13,7 +25,8 @@ A web app for people to submit requests for content to be added to a Plex server
 - Change directory to your apache root on your server and run 'php artisan migrate' to create the necessary tables.
 - Access the app in your browser at http://192.168.33.10/ or update your hosts file and map your desired hostname to the IP previously mentioned. 
 
-###Request status codes:
+## Request status codes
+
 0 - pending
 
 1 - filled 
