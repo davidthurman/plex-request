@@ -6,11 +6,11 @@
 
 -----
 
-![alt_tag](https://i.imgur.com/ewVSZgf.png)
+![Search Example](https://i.imgur.com/ewVSZgf.png)
 
 -----
 
-![alt_tag](https://i.imgur.com/wIZQNEF.png)
+![List of Requests](https://i.imgur.com/wIZQNEF.png)
 
 -----
 
