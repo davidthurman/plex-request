@@ -191,6 +191,11 @@ Route::group(['middleware' => 'auth'], function() {
             'uses' => 'ApiController@requestSubmit'
         ]);
 
+        Route::get('/login/{email}/{password}', [
+            'as' => 'apilogin',
+            'uses' => 'ApiController@login'
+        ]);
+
     });
 
 Route::group(['middleware' => 'registration'], function() {
